@@ -3,13 +3,15 @@
 #'@export
 setGeneric(name="times_query",def=function(fabric, knife){standardGeneric("times_query")})
 
-#'@title times query
-
-#'@rdname times_query-method
-#'@aliases times_query,webdata-method
-#'@keywords internal
-#'@importFrom XML newXMLNode addChildren toString.XMLNode xmlChildren<- xmlValue<- xmlParseString
-#'@export
+#' times query
+#' 
+#' query a webdata object for the time range
+#' 
+#' @rdname times_query-method
+#' @aliases times_query,webdata-method
+#' @keywords internal
+#' @importFrom XML newXMLNode addChildren toString.XMLNode xmlChildren<- xmlValue<- xmlParseString
+#' @export
 setMethod(f = "times_query",signature = c("webdata","missing"), 
           definition = function(fabric, knife){
             knife <- webprocess()
@@ -58,7 +60,7 @@ setMethod(f = "times_query",signature = c("webdata","webprocess"),
             newXMLNode("ows:Identifier", newXMLTextNode('result_as_xml'), parent = rd)
             response <- genericExecute(knife@UTILITY_URL,toString.XMLNode(root))
             values <- tryCatch({
-              nodes <- getNodeSet(content(response),'//gdp:availabletimes/gdp:time')
+              nodes <- getNodeSet(gcontent(response),'//gdp:availabletimes/gdp:time')
               as.POSIXct(sapply(nodes,xmlValue), tz = 'UTC')
             }, error = function(err) {
               return(as.POSIXct(c(NA,NA)))

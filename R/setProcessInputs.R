@@ -1,7 +1,7 @@
 
 .setProcessInputs <- function(webprocess, ...){
   processNames <- names(inputs(webprocess))
-  for (i in 1:length(processNames)){
+  for (i in seq_along(processNames)){
     fun <- processNames[i]
     if (exists(fun)){
       inputs(webprocess,fun) <- do.call(fun, list(...))
@@ -36,10 +36,10 @@ FEATURE_ATTRIBUTE_NAME <- function(stencil,...){
 }
 
 TIME_END <- function(fabric, ...){
-  strftime(times(fabric)[2] ,format = "%Y-%m-%dT%H:%M:%S.000Z")
+  strftime(times(fabric)[2] ,format = "%Y-%m-%dT%H:%M:%S.000Z", tz='UTC')
 }
 TIME_START <- function(fabric, ...){
-  strftime(times(fabric)[1] ,format = "%Y-%m-%dT%H:%M:%S.000Z")
+  strftime(times(fabric)[1] ,format = "%Y-%m-%dT%H:%M:%S.000Z", tz='UTC')
 }
 
 DATASET_ID <- function(fabric, ...){

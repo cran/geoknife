@@ -3,7 +3,13 @@ pkg.env <- new.env()
   setJobState()
 }
 library(methods)
-#' @title webdata class
+
+#' 
+#' webdata class
+#' 
+#' a class for specifying details of web datasets (webdata!). These datasets have to be  
+#' accessible through the OPeNDAP protocol or as WCS (web coverage services). 
+#' 
 #' @slot times vector of POSIXct dates (specifying start and end time of processing)
 #' @slot url URL of web data
 #' @slot variables variable(s) used for processin from dataset
@@ -26,11 +32,11 @@ setClass(
 
 setMethod("initialize", signature = "webdata", 
           definition = function(.Object, times = .Object@times, url = .Object@url, variables = .Object@variables){
-            .Object@times = as.POSIXct(times)
-            .Object@url = url
-            .Object@variables = variables
-            .Object@dataList    = 'gov.usgs.cida.gdp.wps.algorithm.discovery.ListOpendapGrids'
-            .Object@timeList    = 'gov.usgs.cida.gdp.wps.algorithm.discovery.GetGridTimeRange'
+            .Object@times <- geotime(times)
+            .Object@url <- url
+            .Object@variables <- variables
+            .Object@dataList <- 'gov.usgs.cida.gdp.wps.algorithm.discovery.ListOpendapGrids'
+            .Object@timeList <- 'gov.usgs.cida.gdp.wps.algorithm.discovery.GetGridTimeRange'
             return(.Object)
           })
 
