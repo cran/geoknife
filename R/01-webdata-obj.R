@@ -1,7 +1,23 @@
 pkg.env <- new.env()
+pkg.env$gconfig <- list('wps.url'='http://cida.usgs.gov/gdp/process/WebProcessingService',
+                        'sleep.time' = 5, 
+                        'wait' = FALSE,
+                        'email' = as.character(NA),
+                        'algorithm' = list('Area Grid Statistics (weighted)' = 
+                                             "gov.usgs.cida.gdp.wps.algorithm.FeatureWeightedGridStatisticsAlgorithm"),
+                        'verbose' = FALSE,
+                        'version' = '1.0.0')
+
+#' @importFrom utils lsf.str packageName
 .onLoad <- function(libname, pkgname){
   setJobState()
+  funs <- unclass(lsf.str(envir = asNamespace(packageName()), all = TRUE))
+  pkg.env$private.funs <- funs[substr(funs,1,1) == '.']
+  rm(funs)
 }
+
+
+
 library(methods)
 
 #' 

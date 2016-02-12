@@ -26,6 +26,7 @@ setGeneric(name="XML",def=function(stencil, fabric, knife){standardGeneric("XML"
 setMethod(f = "XML",signature = c("ANY","webdata","webprocess"), 
           definition = function(stencil, fabric, knife){
             #stencil can be webgeom OR simplegeom 
+            
   knife <- .setProcessInputs(webprocess = knife, stencil = stencil, fabric = fabric)
   top <- newXMLNode(name='wps:Execute',
                     attrs=c('service'="WPS",'version'= version(knife),
@@ -35,7 +36,6 @@ setMethod(f = "XML",signature = c("ANY","webdata","webprocess"),
                                            'ogc' = knife@OGC_NAMESPACE,
                                            'xlink' = knife@XLINK_NAMESPACE,
                                            'xsi' = knife@XSI_NAMESPACE))
-  
   
   id	<-	newXMLNode("ows:Identifier",newXMLTextNode(knife@algorithm),parent=top)
   di	<-	newXMLNode("wps:DataInputs",parent=top)
@@ -155,7 +155,7 @@ setMethod(f = "addGeom",signature = c("ANY","ANY"),
 setMethod(f = "addGeom",signature = c("simplegeom","ANY"),
           definition = function(stencil, xmlNodes){
             
-  filterID <- FEATURE_ATTRIBUTE_NAME(stencil)
+  filterID <- .FEATURE_ATTRIBUTE_NAME(stencil)
   inEL <- findIdentifierNode(xmlNodes, 'FEATURE_COLLECTION')
   inDatEL  <-	newXMLNode('wps:Data')
   addChildren(inEL,inDatEL)
