@@ -21,11 +21,11 @@ setMethod(f = "query",signature("webgeom",'character'),
               }
               url <- sprintf('%s?service=WFS&version=%s&request=GetFeature&typename=%s&propertyname=%s',
                              url(.Object), version(.Object), geom(.Object), .Object@attribute)
-              input_list[['key']] = geom(.Object)
+              input_list[['key']] <- sprintf("%s/*[local-name()='%s']", geom(.Object), .Object@attribute)
             } else {
               stop('field ', field, ' not supported.')
             }
             input_list[['xml']] <- gcontent(gGET(url))
-            values <- do.call(paste0('parseXML',field), input_list)
+            values <- unique(do.call(paste0('parseXML',field), input_list))
             return(values)
           })

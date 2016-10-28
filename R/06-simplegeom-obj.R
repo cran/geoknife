@@ -28,7 +28,7 @@ setClass(
 setMethod("initialize", signature = "simplegeom", 
           definition = function(.Object, ...) {
             .Object@DRAW_NAMESPACE = 'gov.usgs.cida.gdp.draw'
-            .Object@DRAW_SCHEMA = 'http://cida.usgs.gov/climate/derivative/xsd/draw.xsd'
+            .Object@DRAW_SCHEMA = 'http://cida-test.er.usgs.gov/mda.lakes/draw.xsd'
             .Object@sp <- SpatialPolygons(...)
             return(.Object)
 })
@@ -45,6 +45,7 @@ setMethod("initialize", signature = "simplegeom",
 #' @examples 
 #' simplegeom(c(-88.6, 45.2))
 #' \dontrun{
+#' library(sp)
 #' simplegeom(Srl, proj4string = CRS("+proj=longlat +datum=WGS84"))
 #' }
 #' simplegeom(data.frame('point1'=c(-89, 46), 'point2'=c(-88.6, 45.2)))

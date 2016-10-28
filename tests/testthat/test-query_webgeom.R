@@ -27,3 +27,11 @@ test_that("query values", {
                 values = "New Hampshire")
   expect_is(query(wg, 'values'),'character')
 })
+
+test_that("query values returns only unique", {
+  expect_false(any(
+    duplicated(
+      query(webgeom(geom="sample:Counties" , attribute = "STATE_FIPS"), 'values'))
+    )
+  )
+})
