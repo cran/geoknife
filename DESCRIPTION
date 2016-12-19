@@ -1,8 +1,8 @@
 Package: geoknife
 Type: Package
 Title: Web-Processing of Large Gridded Datasets
-Version: 1.4.0
-Date: 2016-10-26
+Version: 1.5.1
+Date: 2016-12-19
 Authors@R: c( person("Jordan", "Read", role = c("aut","cre"),
     email = "jread@usgs.gov"),
     person("Jordan", "Walker", role = c("aut"),
@@ -16,7 +16,9 @@ Authors@R: c( person("Jordan", "Read", role = c("aut","cre"),
     person("Luke", "Winslow", role = c("aut"),
     email = "lwinslow@usgs.gov"),
     person("Lindsay", "Carr", role = c("aut"),
-    email = "lcarr@usgs.gov"))
+    email = "lcarr@usgs.gov"),
+    person("David", "Watkins", role = c("aut"),
+    email = "wwatkins@usgs.gov"))
 Description: Processes gridded datasets found on the U.S. Geological Survey
     Geo Data Portal web application or elsewhere, using a web-enabled workflow
     that eliminates the need to download and store large datasets that are reliably
@@ -28,24 +30,23 @@ BugReports: https://github.com/USGS-R/geoknife/issues
 Copyright: This software is in the public domain because it contains
         materials that originally came from the United States
         Geological Survey, an agency of the United States Department of
-        Interior. For more information, see the official USGS copyright
-        policy at
-        http://www.usgs.gov/visual-id/credit_usgs.html#copyright
+        Interior.
 Depends: R (>= 3.0)
 Imports: XML, methods, httr (>= 1.0.0), curl, sp, utils
-Suggests: testthat, xtable, knitr, rmarkdown, ggmap, rasterVis,
+Suggests: testthat, xtable, knitr, rmarkdown, ggmap, dplyr, rasterVis,
         ggplot2, rgdal, maps
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
 NeedsCompilation: no
-Packaged: 2016-10-27 16:57:17 UTC; jread
+Packaged: 2016-12-19 15:33:33 UTC; jread
 Author: Jordan Read [aut, cre],
   Jordan Walker [aut],
   Alison Appling [aut],
   David Blodgett [aut],
   Emily Read [aut],
   Luke Winslow [aut],
-  Lindsay Carr [aut]
+  Lindsay Carr [aut],
+  David Watkins [aut]
 Maintainer: Jordan Read <jread@usgs.gov>
 Repository: CRAN
-Date/Publication: 2016-10-28 00:18:04
+Date/Publication: 2016-12-19 17:15:21

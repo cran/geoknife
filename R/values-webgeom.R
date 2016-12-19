@@ -32,9 +32,13 @@ setMethod(f = "values<-",signature(.Object = "webgeom"), definition = function(.
   if(is.na(value[1])){
     .Object@GML_IDs <- as.character(NA)
   } else {
+    gmlID <- fetchGML_IDs(.Object)
+    if(is.null(gmlID)){
+      stop('fetchGML_IDs returned a NULL; the value name you supplied is likely invalid for this feature',
+            call. = FALSE)
+    }
     .Object@GML_IDs <- fetchGML_IDs(.Object)
   }
-  
   return(.Object)})
 
 #'@aliases values
@@ -60,9 +64,11 @@ wfsFilterFeatureXML <- function(.Object, knife=webprocess(), match.case = TRUE){
   f <- newXMLNode('ogc:Filter', parent = q) # skipping namespace
   Or <- newXMLNode('ogc:Or', parent = f) 
   for (val in values(.Object)){
-    p <- newXMLNode('ogc:PropertyIsEqualTo', parent=Or, attrs = c('matchCase'=match.case.char))
-    newXMLNode('ogc:PropertyName', parent = p, newXMLTextNode(.Object@attribute))
-    newXMLNode('ogc:Literal', parent = p, newXMLTextNode(val))
+    newXMLNode('ogc:PropertyIsEqualTo', parent=Or, attrs = c('matchCase'=match.case.char), 
+               .children = list(
+                 newXMLNode('ogc:PropertyName', newXMLTextNode(.Object@attribute)),
+                 newXMLNode('ogc:Literal', newXMLTextNode(val))
+               ))
   }
   
   return(suppressWarnings(toString.XMLNode(top)))
