@@ -1,4 +1,4 @@
-a03f7187d8b673af6873ae6b392a4426 *DESCRIPTION
+17a7d8d4e25feafdf865dd575f83a36a *DESCRIPTION
 c78c6fac4a16b5f59b56d20791464372 *NAMESPACE
 d70199d218a6814349260b311389d476 *R/00-gconfig.R
 014c34c4fb6c8fdcd04de19199990c20 *R/01-webdata-obj.R
@@ -47,7 +47,7 @@ d5b2f4ae8075376dc11e33452143b595 *R/times-webdata.R
 a316a69566a55bbf9d60e21783e789a5 *R/variables-webdata.R
 cc7bb3d1720928c7daa5edd0ae213557 *R/version-generic.R
 9111ff27979b1e512d672050a1d9161a *R/waitUntilFinished.R
-f149d9a54c0fdd83fe65939dbbf27b9a *README.md
+29282ec526c44a3906b7fa8a46a96c6b *README.md
 c6b033a627e44ef8e09f3ac4e41578c2 *build/vignette.rds
 b3b06c9054a7447c444fb9019f5034aa *demo/00Index
 f36b12a666928f122483cd4ade31ac67 *demo/iclus_categorical.R
@@ -56,10 +56,10 @@ a0cff605183888bfe0cb9de32694d7b1 *demo/prism_subset.R
 b78d394d3f200438338cc8f7ab21ffa2 *inst/CITATION
 83768d21cf3fddedf6e355d73be95e50 *inst/doc/geoknife.R
 cbc98cb1819eb7657255e657504dcc64 *inst/doc/geoknife.Rmd
-57cb64a0c635647a74dc94012758ff09 *inst/doc/geoknife.html
+4cc04cc69f10c0a111f0b530e64add66 *inst/doc/geoknife.html
 fd08b0b5ed241ed3f5770dbb18e81fb7 *inst/doc/plot_geotiff.R
 348c9ad75b908ae1baf701bd62ed940e *inst/doc/plot_geotiff.Rmd
-e042c34f508f8778d3d05779bdaec762 *inst/doc/plot_geotiff.html
+8c27805ea57f9346e7c291cb2f4b4f60 *inst/doc/plot_geotiff.html
 06b23427b83b7d49119b4e1699e6d22d *inst/extdata/HUC8_query.RData
 f86ba67bcbf24ca619a2160d73dbbf96 *inst/extdata/HUC8_stencil.RData
 daecf10767c45d0c4aced87085a6926c *inst/extdata/SB_getCapabilities.xml
@@ -125,7 +125,7 @@ fd4f68bb954a14628f6cadf6ca688f3c *man/webgeom-methods.Rd
 7db02561d6d792bd09048c46c0a9d17a *man/webprocess-class.Rd
 6747bf6697b3b5159115c09700fe6539 *man/webprocess-methods.Rd
 e8f83c37ac55d6cea601280a9eba9faa *tests/testthat.R
-b318da86b1a4feed0ea4f46108faacec *tests/testthat/test-dodsReplace.R
+50374fdcb96561b82c04e17468a58813 *tests/testthat/test-dodsReplace.R
 37d8c447642b20d4f1f8ef9bb8c265cd *tests/testthat/test-download_result.R
 b7cd0bf57b52d80d81e4a67db9e2ea04 *tests/testthat/test-gconfig.R
 d1118585e7d5bde0ca0d7ffac58be3f8 *tests/testthat/test-geoknife_com.R
