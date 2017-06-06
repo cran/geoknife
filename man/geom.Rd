@@ -2,10 +2,13 @@
 % Please edit documentation in R/geom-webgeom.R
 \docType{methods}
 \name{geom<-}
+\alias{geom<-}
+\alias{geom}
+\alias{geom}
+\alias{geom<-,webgeom-method}
 \alias{geom}
 \alias{geom,webgeom-method}
-\alias{geom<-}
-\alias{geom<-,webgeom-method}
+\alias{geom}
 \title{the geom of an object}
 \usage{
 geom(.Object) <- value
@@ -23,10 +26,9 @@ geom(.Object)
 }
 \description{
 The "feature" of a webgeom. This is the key mapping to the web resource 
-that is used as the spatial feature of refernce. Other details specified in 
+that is used as the spatial feature of reference. Other details specified in 
 \code{\link{attribute}} and \code{\link{values}}.
 }
 \seealso{
 \code{\link{attribute}} and \code{\link{values}}
 }
-

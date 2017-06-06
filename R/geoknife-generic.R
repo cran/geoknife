@@ -14,10 +14,10 @@
 #'@rdname geoknife-methods
 #'@details
 #'The \code{stencil} argument is akin to cookie cutter(s), which specify how the dataset is 
-#'to be subsampled spatially. Supported types are all geometric in nature, be they collections 
-#'of points or polygons. Because geoporcessing operations require a non-zero area for \code{stencil}, 
+#'to be sub-sampled spatially. Supported types are all geometric in nature, be they collections 
+#'of points or polygons. Because geoprocessing operations require a non-zero area for \code{stencil}, 
 #'if points are used (i.e., the different point collections that can be used in \code{\link{simplegeom}}), 
-#'there is a negligle automatic point buffer applied to each point to result in a non-zero area. 
+#'there is a negligible automatic point buffer applied to each point to result in a non-zero area. 
 #'
 #'Naming of the components of the \code{stencil} will impact the formatting of the result returned by 
 #'the geoknife processing job (the \code{\link{geojob}})
@@ -82,7 +82,6 @@ geoknife <- function(stencil, fabric, knife = webprocess(...), ...){
   return(geojob)
 }
 
-
 #'@importFrom httr content_type_xml
 genericExecute	<-	function(url,requestXML){
 
@@ -100,10 +99,12 @@ parseXMLalgorithms  <-  function(xml){
   childKey <- "ows:Identifier"
   titleKey <- "ows:Title"
   
-  nodes <- getNodeSet(xml, sprintf("//%s/%s",parentKey,childKey))
+  nodes <- getNodeSet(xml, sprintf("//%s/%s",parentKey,childKey), 
+                      namespaces = pkg.env$NAMESPACES)
   values  <-  lapply(nodes,xmlValue)
   
-  nodes <- getNodeSet(xml, sprintf("//%s/%s",parentKey,titleKey))
+  nodes <- getNodeSet(xml, sprintf("//%s/%s",parentKey,titleKey),
+                      namespaces = pkg.env$NAMESPACES)
   names(values) <- sapply(nodes,xmlValue)
   
   return(values)
@@ -117,7 +118,7 @@ parseXMLgeoms	<-	function(xml){
   key="Name"
   # ignore namespaces
   xpath <- sprintf("//*[local-name()='%s']/*[local-name()='%s']/*[local-name()='%s']",parentKey,childKey,key)
-  nodes <- getNodeSet(xml, xpath)
+  nodes <- getNodeSet(xml, xpath, namespaces = pkg.env$NAMESPACES)
 	values	<-	sapply(nodes,xmlValue)
 	return(values)
 }

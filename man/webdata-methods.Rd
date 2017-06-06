@@ -3,9 +3,14 @@
 \docType{methods}
 \name{webdata}
 \alias{webdata}
-\alias{webdata,ANY-method}
-\alias{webdata,character-method}
 \alias{webdata,missing-method}
+\alias{webdata}
+\alias{webdata,character-method}
+\alias{webdata}
+\alias{webdata,geojob-method}
+\alias{webdata}
+\alias{webdata,ANY-method}
+\alias{webdata}
 \title{create webdata object}
 \usage{
 webdata(.Object, ...)
@@ -14,6 +19,8 @@ webdata(.Object, ...)
 
 \S4method{webdata}{character}(.Object = c("prism", "iclus", "daymet", "gldas",
   "nldas", "topowx", "solar", "metobs"), ...)
+
+\S4method{webdata}{geojob}(.Object, ...)
 
 \S4method{webdata}{ANY}(.Object, ...)
 }
@@ -39,6 +46,7 @@ A class representing a web dataset.
 
 \item{\code{variable}}{value of type \code{"character"}, the variable(s) for data}
 }}
+
 \examples{
 webdata('prism')
 webdata('prism', times=as.POSIXct(c('1990-01-01', '1995-01-01')))
@@ -49,4 +57,3 @@ webdata(list(times = as.POSIXct(c('1895-01-01 00:00:00','1899-01-01 00:00:00')),
 \author{
 Jordan S Read
 }
-

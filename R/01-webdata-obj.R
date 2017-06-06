@@ -8,6 +8,13 @@ pkg.env$gconfig <- list('wps.url'='https://cida.usgs.gov/gdp/process/WebProcessi
                         'verbose' = FALSE,
                         'retries' = 1,
                         'version' = '1.0.0')
+pkg.env$NAMESPACES <- c(wps = 'http://www.opengis.net/wps/1.0.0',
+                        xsi = 'http://www.w3.org/2001/XMLSchema-instance',
+                        xlink = 'http://www.w3.org/1999/xlink',
+                        ogc = 'http://www.opengis.net/ogc',
+                        ows = 'http://www.opengis.net/ows/1.1',
+                        gml = 'http://www.opengis.net/gml',
+                        wfs = 'http://www.opengis.net/wfs')
 
 #' @importFrom utils lsf.str packageName
 .onLoad <- function(libname, pkgname){
@@ -29,7 +36,7 @@ library(methods)
 #' 
 #' @slot times vector of POSIXct dates (specifying start and end time of processing)
 #' @slot url URL of web data
-#' @slot variables variable(s) used for processin from dataset
+#' @slot variables variable(s) used for processing from dataset
 #' @rdname webdata-class
 #' @import methods
 setClass(
@@ -103,6 +110,23 @@ setMethod("webdata", signature("character"), function(.Object=c("prism",  "iclus
   return(webdata)
 })
 
+#' @rdname webdata-methods
+#' @aliases webdata
+setMethod("webdata", signature("geojob"), function(.Object, ...) {
+  xmlVals <- inputs(xmlParse(xml(.Object)))
+  url <- xmlVals[["DATASET_URI"]]
+  times <- c(start = xmlVals[["TIME_START"]], end = xmlVals[["TIME_END"]])
+  if(is.null(times[['start']])) {times[['start']] <- NA}
+  if(length(times) == 1) {times[['end']] <- NA}
+  times <- c(times[['start']], times[['end']])#could get out of order with one missing
+  times <- as.POSIXct(times, format = '%Y-%m-%dT%H:%M:%S')
+  
+  variables <- xmlVals[names(xmlVals) %in% c("OBSERVED_PROPERTY", "DATASET_ID")]
+  webdata <- webdata(url = url, times = times, 
+                        variables = unlist(variables), ...)
+  return(webdata) 
+})
+
 #'@rdname webdata-methods
 #'@aliases webdata
 setMethod("webdata", signature("ANY"), function(.Object, ...) {
@@ -160,4 +184,3 @@ setAs('list', 'webdata', function(from){
   .Object <- do.call(what = "webdata", args = from)
   return(.Object)
 })
-
