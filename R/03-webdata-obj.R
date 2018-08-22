@@ -16,6 +16,10 @@ pkg.env$NAMESPACES <- c(wps = 'http://www.opengis.net/wps/1.0.0',
                         gml = 'http://www.opengis.net/gml',
                         wfs = 'http://www.opengis.net/wfs')
 
+pkg.env$SCHEMA_LOCATIONS <- c(WPS_SCHEMA_LOCATION = 'http://schemas.opengis.net/wps/1.0.0/wpsExecute_request.xsd',
+                              XSI_SCHEMA_LOCATION = 'http://www.opengis.net/wfs ../wfs/1.1.0/WFS.xsd',
+                              GML_SCHEMA_LOCATION = 'http://schemas.opengis.net/gml/3.1.1/base/feature.xsd')
+
 #' @importFrom utils lsf.str packageName
 .onLoad <- function(libname, pkgname){
   setJobState()
@@ -113,7 +117,7 @@ setMethod("webdata", signature("character"), function(.Object=c("prism",  "iclus
 #' @rdname webdata-methods
 #' @aliases webdata
 setMethod("webdata", signature("geojob"), function(.Object, ...) {
-  xmlVals <- inputs(xmlParse(xml(.Object)))
+  xmlVals <- inputs(xml2::read_xml(xml(.Object)))
   url <- xmlVals[["DATASET_URI"]]
   times <- c(start = xmlVals[["TIME_START"]], end = xmlVals[["TIME_END"]])
   if(is.null(times[['start']])) {times[['start']] <- NA}
@@ -148,7 +152,7 @@ getPkgData <- function(){
               variables = 'housing_classes_iclus_a1_2010'),
        'daymet' = 
          list(times = as.POSIXct(c('2000-01-01 00:00:00','2001-01-01 00:00:00')),
-              url = 'http://thredds.daac.ornl.gov/thredds/dodsC/daymet-agg/daymet-agg.ncml',
+              url = 'https://thredds.daac.ornl.gov/thredds/dodsC/daymet-v3-agg/na.ncml',
               variables = 'prcp'),
        'stageiv' = 
          list(times = as.POSIXct(c('2010-01-01 00:00:00','2010-01-05 00:00:00')),

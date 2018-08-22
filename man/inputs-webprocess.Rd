@@ -5,15 +5,10 @@
 \alias{inputs<-}
 \alias{inputs}
 \alias{inputs,webprocess-method}
-\alias{inputs}
-\alias{inputs,XMLAbstractDocument-method}
-\alias{inputs}
+\alias{inputs,xml_document-method}
 \alias{inputs<-,webprocess,missing-method}
-\alias{inputs<-}
 \alias{inputs<-,webprocess,character-method}
-\alias{inputs<-}
 \alias{inputs<-,webprocess,list-method}
-\alias{inputs<-}
 \title{inputs of webprocess}
 \usage{
 inputs(.Object, ...) <- value
@@ -22,7 +17,7 @@ inputs(.Object, ..., value)
 
 \S4method{inputs}{webprocess}(.Object, ..., value)
 
-\S4method{inputs}{XMLAbstractDocument}(.Object, ..., value)
+\S4method{inputs}{xml_document}(.Object, ..., value)
 
 \S4method{inputs}{webprocess,missing}(.Object, ...) <- value
 

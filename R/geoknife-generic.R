@@ -56,7 +56,7 @@ geoknife <- function(stencil, fabric, knife = webprocess(...), ...){
     # if ... are specified, pass in additional args through ... to modify. 
     knife <- initialize(knife, ...)
   }
-
+  
   if (!is(stencil, "webgeom")){
     stencil <- tryCatch({
       as(stencil, Class = "simplegeom")
@@ -65,7 +65,7 @@ geoknife <- function(stencil, fabric, knife = webprocess(...), ...){
       return(wg)
     })
   }
-
+  
   fabric <- as(fabric, Class = "webdata")
   geojob <- geojob()
   xml(geojob) <- XML(stencil, fabric, knife)
@@ -83,72 +83,69 @@ geoknife <- function(stencil, fabric, knife = webprocess(...), ...){
 }
 
 #'@importFrom httr content_type_xml
-genericExecute	<-	function(url,requestXML){
-
-	response <-	gPOST(url,content_type_xml(),
-                  body = requestXML)		
-
-	return(response)
-
+genericExecute <- function(url,requestXML){
+  
+  response <- gPOST(url,content_type_xml(),
+                    body = requestXML)  
+  
+  return(response)
+  
 }
 
-#'@importFrom XML htmlParse getNodeSet
 parseXMLalgorithms  <-  function(xml){
   
   parentKey <- "wps:Process"
   childKey <- "ows:Identifier"
   titleKey <- "ows:Title"
   
-  nodes <- getNodeSet(xml, sprintf("//%s/%s",parentKey,childKey), 
-                      namespaces = pkg.env$NAMESPACES)
-  values  <-  lapply(nodes,xmlValue)
+  nodes <- xml2::xml_find_all(xml, sprintf("//%s/%s",parentKey,childKey), 
+                              ns = pkg.env$NAMESPACES)
+  values  <-  lapply(nodes,xml2::xml_text)
   
-  nodes <- getNodeSet(xml, sprintf("//%s/%s",parentKey,titleKey),
-                      namespaces = pkg.env$NAMESPACES)
-  names(values) <- sapply(nodes,xmlValue)
+  nodes <- xml2::xml_find_all(xml, sprintf("//%s/%s",parentKey,titleKey),
+                              ns = pkg.env$NAMESPACES)
+  names(values) <- xml2::xml_text(nodes)
   
   return(values)
 }
 
-#'@importFrom XML htmlParse getNodeSet
-parseXMLgeoms	<-	function(xml){
+parseXMLgeoms <- function(xml){
   
   parentKey <- "FeatureTypeList"
   childKey <- "FeatureType"
   key="Name"
   # ignore namespaces
   xpath <- sprintf("//*[local-name()='%s']/*[local-name()='%s']/*[local-name()='%s']",parentKey,childKey,key)
-  nodes <- getNodeSet(xml, xpath, namespaces = pkg.env$NAMESPACES)
-	values	<-	sapply(nodes,xmlValue)
-	return(values)
+  nodes <- xml2::xml_find_all(xml, xpath, ns = pkg.env$NAMESPACES)
+  values <- xml2::xml_text(nodes)
+  return(values)
 }
 
 
-#'@importFrom XML htmlParse getNodeSet
-parseXMLattributes	<-	function(xml,rm.duplicates = FALSE){
+parseXMLattributes <- function(xml,rm.duplicates = FALSE){
   parentKey  <-  "xsd:element"
-  childKey	<-	"maxOccurs"
+  childKey <- "maxOccurs"
   key="name"
   
-	nodes	<-	getNodeSet(xml,paste(c("//",parentKey,"[@",childKey,"]"),collapse=""))
-	# will error if none found
-	values	<-	list()
-	for (i in 1:length(nodes)){
-		values[[i]]	<-	xmlGetAttr(nodes[[i]],key)
-	}
-	values	<-	unlist(values[values != "the_geom" & values != ""])
+  nodes <- xml2::xml_find_all(xml,paste(c("//",parentKey,"[@",childKey,"]"),collapse=""))
+  # will error if none found
+  values <- list()
+  for (i in 1:length(nodes)){
+    values[[i]] <- xml2::xml_attr(nodes[[i]],key)
+  }
+  values <- unlist(values[values != "the_geom" & values != ""])
   if (rm.duplicates){
     values = unique(values)
   }
-	return(values)
+  return(values)
 }
-#'@importFrom XML htmlParse getNodeSet
-parseXMLvalues	<-	function(xml, key, rm.duplicates = FALSE){
-	nodes	<-	getNodeSet(xml,paste0("//",key))
-	# will error if none found
-	values	<-	sapply(nodes,xmlValue)
+
+parseXMLvalues <- function(xml, key, rm.duplicates = FALSE){
+  nodes <- xml2::xml_find_all(xml,paste0("//",key))
+  # will error if none found
+  values <- xml2::xml_text(nodes)
   if (rm.duplicates){
     values = unique(values)
   }
-	return(values)
+  return(values)
 }

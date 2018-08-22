@@ -1,5 +1,7 @@
 context("geoknife utils")
 
+default.sleep <- geoknife:::gconfig('sleep.time')
+geoknife:::gconfig(sleep.time=0.1)
 
 test_that("verbose", {
   testthat::skip_on_cran()
@@ -12,7 +14,7 @@ test_that("verbose", {
 
 test_that("error on url", {
   testthat::skip_on_cran()
-  expect_error(geoknife:::retryVERB(httr::GET('bad.url.html')), "Couldn't resolve host name")
+  expect_error(geoknife:::retryVERB(httr::GET('bad.url.html')), ".*bad.url.html.*")
 })
 
 context("geoknife convienence functions for job state")
@@ -21,6 +23,7 @@ test_that("check status of empty job", {
   testthat::skip_on_cran()
   expect_equal(check(geojob())$status, 'none')
   expect_equal(check(geojob())$statusType, 'none')
+  expect_equal(check(geojob())$percentComplete, 'none')
 })
 
 test_that("check status of an ID that is not valid", {
@@ -57,6 +60,22 @@ test_that("result fails with failed job",{
   expect_error(result(failed.id), "processing is incomplete or has failed. See check()")
 })
 
+# test_that("percent complete works",{
+# Used to test percent complete -- Do Not Run in Continuous Integration!
+# fabric <- webdata('prism')
+# times(fabric)[2] <- '1990-01-01'
+# job <- geoknife(c(-89,43), fabric, wait = F)
+
+# Sys.sleep(5)
+# status <- check(job)
+# expect_equal(names(status)[4], "percentCompleted")
+# expect_true(status$percentComplete != "100")
+
+# Sys.sleep(10)
+# status <- check(job)
+# expect_true(status$percentComplete == "100")
+# })
+
 test_that("can create geojob from xml", {
   xmlLoc <- system.file("extdata", "testjob.xml",
                         package = "geoknife")
@@ -66,3 +85,5 @@ test_that("can create geojob from xml", {
   jobWithURL <- geojob(xml = xmlLoc, url = "foo")
   expect_equal(jobWithURL@url, "foo")
 })
+
+geoknife:::gconfig(sleep.time=default.sleep)

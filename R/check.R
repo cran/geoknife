@@ -13,8 +13,7 @@
 #'@aliases check
 #'@author Jordan S. Read
 #'@seealso \code{\link{start}}
-#'@importFrom XML xmlNamespaceDefinitions xmlRoot
-#' @importFrom httr http_error
+#'@importFrom httr http_error
 #'@rdname check-geojob
 #'@examples 
 #'gj <- geojob() # create geojob object
@@ -25,11 +24,11 @@ setGeneric(name="check",def=function(.Object){standardGeneric("check")})
 #'@rdname check-geojob
 #'@aliases check
 setMethod(f = "check",signature(.Object = "geojob"), definition = function(.Object){
-
 	process	<-	list(status=NULL,URL=NULL)
 	if (id(.Object) == "<no active job>"){
 		process$status <- 'none'
 		process$statusType <- 'none'
+		process$percentComplete <- 'none'
     return(process)
 	} else if (!is.geojobID(id(.Object))) {
 	  stop(id(.Object), ' is not a valid geojob ID. Status cannot be checked', call. = FALSE)
@@ -48,22 +47,26 @@ setMethod(f = "check",signature(.Object = "geojob"), definition = function(.Obje
   if (is.null(checkForComplete)){
     process$status <- 'unknown'
     process$statusType <- 'unknown'
+    process$percentComplete <- 'unknown'
   }
 	if (is.null(process$status)){
 		checkForCompleteResponse <- gcontent(checkForComplete)
-		checkResponseNS <- xmlNamespaceDefinitions(checkForCompleteResponse, simplify = TRUE) 
-		root <- xmlRoot(checkForCompleteResponse)
-		status <- sapply(xmlChildren(root[["Status"]]),xmlValue)
-		process$status	<-	status[[1]]
-		process$statusType <- sapply(xmlChildren(root[["Status"]]),xmlName)[[1]]
+		checkResponseNS <- xml2::xml_ns(checkForCompleteResponse) 
+		root <- xml2::xml_root(checkForCompleteResponse)
+		status <- xml2::xml_find_all(root,xpath = "//wps:Status", ns = checkResponseNS)
+		process$status <- xml2::xml_text(status)
+		process$statusType <- xml2::xml_name(xml2::xml_child(status))
 		
 		if (process$status == "Process successful"){
-			root <- xmlRoot(checkForCompleteResponse)
-			process$URL <- as.character(xpathApply(root, "//@href", namespaces = checkResponseNS)[[1]])
+			root <- xml2::xml_root(checkForCompleteResponse)
+			process$percentComplete <- "100"
+			process$URL <- xml2::xml_text(xml2::xml_find_all(root, "//@href", ns = checkResponseNS)[[1]])
 		} else if (process$status == ""){
 		  process$status <- "ProcessStarted"
 		} else if (substr(process$status, 1, 34) == "org.n52.wps.server.ExceptionReport"){
 		  process$status <- "ProcessFailed"
+		} else if (process$status == "Process Started") {
+		  process$percentCompleted <- xml2::xml_attr(xml2::xml_find_all(root, "//wps:ProcessStarted"), "percentCompleted", ns = checkResponseNS)
 		}
 	}
   
