@@ -1,6 +1,6 @@
-cf15553967ab6f01de0e1106f873d1df *DESCRIPTION
+400c58f073ee5d3ae9f3b507de657fda *DESCRIPTION
 f62f1e2e14f15196d23b1650f71e91dd *NAMESPACE
-c3010dca7983e703fd7d980d1aacbe5a *NEWS.md
+077f5a0ba7e7d1bec28265fa911b0bd1 *NEWS.md
 09e61e8db4291d08e011df56297cf710 *R/00-gconfig.R
 b24aac1d08250ca76f607bdfd8a122c8 *R/01-geojob-obj.R
 e62e394512d6e265d03d262f89e4fb64 *R/02-webgeom-obj.R
@@ -8,7 +8,7 @@ a0810591f28f30234e10a17e41c4298f *R/03-webdata-obj.R
 e85e1aa73d17ee228902238d499fae9d *R/04-webprocess-obj.R
 4b1b01cc4bc1a83ad4e3ba42dd9474ba *R/06-simplegeom-obj.R
 7bcec138f0b90de216176b109ed0b0ba *R/07-datagroup-obj.R
-4b7e738eb4bdd4e5e188b054916968df *R/algorithm-webprocess.R
+81c4290aa14e14d96da1e4ce0077c647 *R/algorithm-webprocess.R
 815ac7ef493431195f48dd687e7e7f93 *R/algorithmVersion-webprocess.R
 5475dfa424638a19c521303a175ff12b *R/attribute-webgeom.R
 5431c67983d68f11fa650c993d4be1f4 *R/bufferPoint.R
@@ -21,7 +21,7 @@ ed34c05caae84a43f7ed673750ade844 *R/email-geojob.R
 fd37ae766e9e6738ca681fc97ecbe0ab *R/geoknifeUtils.R
 232aa14d29ff9b9ab82d5df408f8dc52 *R/geom-webgeom.R
 3fee6803aa32c9092340926cd8072b5c *R/initializeProcessInputs.R
-4007319d99c3f8c51bd998878ca9c7cc *R/inputs-webprocess.R
+9a8cb7e5f76d1d8f281ba58a23a6c99c *R/inputs-webprocess.R
 735a83111f5d1c6a839191d5fc6f1555 *R/parseCategorical.R
 dc016a12af406413fb34cd7f42c3deaf *R/parseTimeseries.R
 54631d37f6cfafd1c73af4c818e8eb79 *R/processInputsToXML.R
@@ -47,8 +47,8 @@ dd3e9a1dff69404a76f4bec702253dbb *R/show-webprocess.R
 45096adbe1b0f19e5a1f105fb212bcb2 *R/values-webgeom.R
 a316a69566a55bbf9d60e21783e789a5 *R/variables-webdata.R
 cc7bb3d1720928c7daa5edd0ae213557 *R/version-generic.R
-caafcd8c1ba3adff45c7b4a0815cbde8 *R/waitUntilFinished.R
-d71df05ee6d45bb66153f49429bc3972 *build/vignette.rds
+9eff39e3cc339ae6d16c12a7430f5d33 *R/waitUntilFinished.R
+8cfb0bed5098ee51ca7611e197bd9953 *build/vignette.rds
 b3b06c9054a7447c444fb9019f5034aa *demo/00Index
 f36b12a666928f122483cd4ade31ac67 *demo/iclus_categorical.R
 a0cff605183888bfe0cb9de32694d7b1 *demo/prism_subset.R
@@ -56,13 +56,13 @@ a0cff605183888bfe0cb9de32694d7b1 *demo/prism_subset.R
 b78d394d3f200438338cc8f7ab21ffa2 *inst/CITATION
 2bcabb381d41f8ff60f09ee839dbebc4 *inst/doc/custom_data_sources.R
 a23392ef9dc512c81ab53399a9169bfe *inst/doc/custom_data_sources.Rmd
-db2acb711a65b7185a84873ed5917313 *inst/doc/custom_data_sources.html
+0216c72440ba0946b9588c7b29589cce *inst/doc/custom_data_sources.html
 83768d21cf3fddedf6e355d73be95e50 *inst/doc/geoknife.R
 b5598f1257e4c715d6bc50e7cd4ecad3 *inst/doc/geoknife.Rmd
-97e6bb83dfce0c070346777d6c1ec783 *inst/doc/geoknife.html
+38307cb9fa21f5a008f7e513a55fa4e4 *inst/doc/geoknife.html
 05b32bfe237adc4a48137987285bc99a *inst/doc/plot_geotiff.R
 6f7d5b81447113b1bd6989fcde6b9e40 *inst/doc/plot_geotiff.Rmd
-5383614226fbad0b044231da8bb22339 *inst/doc/plot_geotiff.html
+96a5f6be1e1da80432e9803b26abe688 *inst/doc/plot_geotiff.html
 06b23427b83b7d49119b4e1699e6d22d *inst/extdata/HUC8_query.RData
 f86ba67bcbf24ca619a2160d73dbbf96 *inst/extdata/HUC8_stencil.RData
 daecf10767c45d0c4aced87085a6926c *inst/extdata/SB_getCapabilities.xml
@@ -90,7 +90,7 @@ c11cf9bd9e9f9c90364d30611ff2e204 *inst/templates/utility_execute_template.xml
 8a5daa1420316659d3e98b6c93c634ae *inst/unnamed-chunk-7-1.png
 00dfae0f8ac7a3591013ca815cf65fe8 *man/XML-method.Rd
 31298f91c61eb1a9f2cd4d7fc306cd51 *man/abstract-datagroup.Rd
-5f2035e3818a6fd64c5900bf1c830ae8 *man/algorithm-webprocess.Rd
+d51cee5ec0105f1271f67628fc47d698 *man/algorithm-webprocess.Rd
 570fccaae860765169e08549bfdb739b *man/attribute.Rd
 07b6998a3ae33a031558e72c84462e4e *man/bufferPoint.Rd
 ef1824a356d84e0f618c643a539bdd43 *man/canStart.Rd
@@ -108,7 +108,7 @@ cdcbf5afb6e04430a5a00aaaa8151fdc *man/geojob-methods.Rd
 5562ede927a13209ee8510cb34a94ecc *man/geoknife-methods.Rd
 0a31b5389fddb0498307671cff91c55f *man/geom.Rd
 fcc3f71a77d2939978976a8b3459033f *man/getJobState.Rd
-3f600e88bc7689dc46c0091302194798 *man/inputs-webprocess.Rd
+7504600d154469a5e19f72e44bbbdc09 *man/inputs-webprocess.Rd
 7a3f60514be1cd6cc5735839347a430c *man/parseCategorical.Rd
 278fc720691b95b38108da82da8f6c22 *man/parseTimeseries.Rd
 3fe3e569d89a31f3e9158a733d71d102 *man/query.Rd
@@ -134,7 +134,7 @@ f65587876023498203a6eac44a820ec2 *man/webgeom-class.Rd
 ce5dd66a6c496c3fb1715ac36c86aa2c *man/webprocess-class.Rd
 92dcaece21a7590e83fde68184725726 *man/webprocess-methods.Rd
 e8f83c37ac55d6cea601280a9eba9faa *tests/testthat.R
-096c6e8a89ea56716c979f2517951aac *tests/testthat/00_create_test_data.R
+515776ffec4e06854ca7be8b4cf34e85 *tests/testthat/00_create_test_data.R
 85a833e195f1629d67226ee57a8e7d89 *tests/testthat/data/test_XML_no_gmlid_wd.rds
 ea839b001d294082cdf3730c281c03d4 *tests/testthat/data/test_XML_no_gmlid_wg.rds
 0cbc5d8811673011031d358163956e1f *tests/testthat/data/test_XML_no_gmlid_xml.xml
@@ -165,10 +165,10 @@ b919420628acea69b4e360535c17b899 *tests/testthat/data/test_webprocess_knife_prod
 f21ced3c0d4950103ccde2c925fb2548 *tests/testthat/test-download_result.R
 fe45b920344ac9c0fcfe10526345cdb2 *tests/testthat/test-gconfig.R
 2ec59bc96facc69db5e74d6f247bbfad *tests/testthat/test-geoknife_output_parser.R
-b50889824a00589ebf05d336b602e7bd *tests/testthat/test-geoknife_setters.R
-19d0ae2561781a55f3962a2a568eb2bf *tests/testthat/test-geoknife_utils.R
+4ecba1a882cf015ff2f171d47dab2083 *tests/testthat/test-geoknife_setters.R
+f38851903f9160419a69e67b9b6dff20 *tests/testthat/test-geoknife_utils.R
 1de9fce2e34d65b51dc48f433bd21cad *tests/testthat/test-geoknife_xml_parser.R
-127e9aa6d5e1f6ba63d7d9f341f1d72c *tests/testthat/test-knife_shorthand.R
+c32c8a521bb92c760f708f5d18e697d7 *tests/testthat/test-knife_shorthand.R
 469fbe66b3f4bc5026cd8e8567ee78bc *tests/testthat/test-parseCategorical.R
 53e3b2e0866378ec1cb7e52e3a95c446 *tests/testthat/test-processErrors.R
 3aebd48a25d3a31421b26af94f9bb258 *tests/testthat/test-query_webdata.R
@@ -181,7 +181,7 @@ b04cbed1ea9523c7b1d32919514488e9 *tests/testthat/test-times_webdata.R
 2a74f923ae0dcc16e98362a96f5840bf *tests/testthat/test-waitUntilFinished.R
 623415b96e6f7df642ff3eb5e857e819 *tests/testthat/test-webdata_object.R
 5fd499a2fe78778aa3f7244c681dc54c *tests/testthat/test-webprocess_input.R
-179ef8d33387416bf25d4f9dbee186b5 *tests/testthat/test-webprocess_object.R
+61809daa9b25f73cd8bb841a79873516 *tests/testthat/test-webprocess_object.R
 93919b6f1e483cbd822daa1521ebd87a *tests/testthat/test-whisker_templating.R
 a23392ef9dc512c81ab53399a9169bfe *vignettes/custom_data_sources.Rmd
 b5598f1257e4c715d6bc50e7cd4ecad3 *vignettes/geoknife.Rmd
