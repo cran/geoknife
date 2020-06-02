@@ -1,59 +1,99 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <meta name="author" content="Jordan Read" />
 
 
 <title>geoknife package</title>
 
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 
 </style>
 <script>
@@ -69,7 +109,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -80,7 +120,190 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
 
 </head>
 
@@ -90,32 +313,34 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">geoknife package</h1>
-<h4 class="author"><em>Jordan Read</em></h4>
-<h4 class="date"><em>30 January, 2019</em></h4>
+<h4 class="author">Jordan Read</h4>
+<h4 class="date">01 June, 2020</h4>
 
 
 <div id="TOC">
 <ul>
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#installation">Installation</a></li>
-<li><a href="#getting-started">getting started</a><ul>
+<li><a href="#getting-started">getting started</a>
+<ul>
 <li><a href="#geoknife-concepts">geoknife concepts</a></li>
 <li><a href="#remote-processing-basics">remote processing basics</a></li>
 <li><a href="#quick-start-guide">quick start guide</a></li>
 </ul></li>
-<li><a href="#spatial-features-stencil">spatial features (<code>stencil</code>)</a><ul>
+<li><a href="#spatial-features-stencil">spatial features (<code>stencil</code>)</a>
+<ul>
 <li><a href="#simplegeom-object"><code>simplegeom</code> object</a></li>
 <li><a href="#webgeom-object"><code>webgeom</code> object</a></li>
 <li><a href="#quick-access-to-web-available-data-for-webgeoms">quick access to web available data for webgeoms</a></li>
 <li><a href="#query-function-for-webgeom">query function for <code>webgeom</code></a></li>
 </ul></li>
-<li><a href="#gridded-data-fabric">gridded data (<code>fabric</code>)</a><ul>
+<li><a href="#gridded-data-fabric">gridded data (<code>fabric</code>)</a>
+<ul>
 <li><a href="#webdata-object"><code>webdata</code> object</a></li>
 <li><a href="#find-data-that-is-indexed-by-the-geo-data-portal-catalog">find data that is indexed by the Geo Data Portal catalog</a></li>
 <li><a href="#find-data-that-is-not-indexed-by-the-geo-data-portal-catalog">find data that is <em>not</em> indexed by the Geo Data Portal catalog</a></li>
 <li><a href="#query-function-for-webdata">query function for <code>webdata</code></a></li>
 </ul></li>
-<li><a href="#knife-object"><code>knife</code> object</a><ul>
+<li><a href="#knife-object"><code>knife</code> object</a>
+<ul>
 <li><a href="#query-function-for-webprocess">query function for <code>webprocess</code></a></li>
 <li><a href="#algorithm">algorithm</a></li>
 <li><a href="#inputs">inputs</a></li>
@@ -123,33 +348,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="#wait"><code>wait</code></a></li>
 <li><a href="#email"><code>email</code></a></li>
 </ul></li>
-<li><a href="#geojob-details"><code>geojob</code> details</a><ul>
+<li><a href="#geojob-details"><code>geojob</code> details</a>
+<ul>
 <li><a href="#geojob-class-and-details"><code>geojob</code> class and details</a></li>
 <li><a href="#check-and-related-functions"><code>check</code> and related functions</a></li>
 <li><a href="#cancel-geojob"><code>cancel</code> geojob</a></li>
 </ul></li>
-<li><a href="#geoknife-web-resources">geoknife web resources</a><ul>
+<li><a href="#geoknife-web-resources">geoknife web resources</a>
+<ul>
 <li><a href="#geo-data-portal">Geo Data Portal</a></li>
 </ul></li>
 </ul>
 </div>
 
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
+<p>##Introduction</p>
 <p>The <strong>geoknife</strong> package was created to support web-based geoprocessing of large gridded datasets according to their overlap with landscape (or aquatic/ocean) features that are often irregularly shaped. geoknife creates data access and subsequent geoprocessing requests for the USGS’s Geo Data Portal to carry out on a web server. The results of these requests are available for download after the processes have been completed. This type of workflow has three main advantages: 1) it allows the user to avoid downloading large datasets, 2) it avoids reinventing the wheel for the creation and optimization of complex geoprocessing algorithms, and 3) computing resources are dedicated elsewhere, so geoknife operations do not have much of an impact on a local computer.</p>
 <p>Because communication with web resources are central to geoknife operations, users must have an active internet connection. geoknife interacts with a remote server to discover processing capabilities, find already available geospatial areas of interest (these are normally user-uploaded shapefiles), get gridded dataset characteristics, execute geoprocessing requests, and get geoprocessing results.</p>
 <p>The main elements of setting up and carrying out a geoknife ‘job’ (geojob) include defining the feature of interest (the stencil argument in the geoknife function), the gridded web dataset to be processed (the fabric argument in the geoknife function), and the the processing algorithm parameters (the knife argument in the geoknife function). The status of the geojob can be checked with check, and output can be loaded into a data.frame with results. See below for more details.</p>
-</div>
-<div id="installation" class="section level2">
-<h2>Installation</h2>
-<p>To install the stable version of <strong>geoknife</strong> package with dependencies:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;geoknife&quot;</span>, 
-    <span class="dt">repos =</span> <span class="kw">c</span>(<span class="st">&quot;https://owi.usgs.gov/R&quot;</span>,<span class="st">&quot;https://cran.rstudio.com/&quot;</span>),
-    <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>##Installation To install the stable version of <strong>geoknife</strong> package with dependencies:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;geoknife&quot;</span>, </span>
+<span id="cb1-2"><a href="#cb1-2"></a>    <span class="dt">repos =</span> <span class="kw">c</span>(<span class="st">&quot;https://owi.usgs.gov/R&quot;</span>,<span class="st">&quot;https://cran.rstudio.com/&quot;</span>),</span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p>Or to install the current development version of the package:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)
-devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">'USGS-R/geoknife'</span>)</code></pre></div>
-</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&#39;USGS-R/geoknife&#39;</span>)</span></code></pre></div>
 <div id="getting-started" class="section level2">
 <h2>getting started</h2>
 <p>The <code>geoknife</code> package was created to support web-based geoprocessing of large gridded datasets according to their overlap with landscape (or aquatic/ocean) features that are often irregularly shaped. geoknife creates data access and subsequent geoprocessing requests for the USGS’s Geo Data Portal to carry out on a web server.</p>
@@ -179,20 +401,20 @@ devtools<span class="op">::</span><span class="kw">install_github</span>(<span c
 <div id="define-a-stencil-that-represents-the-geographic-region-to-slice-out-of-the-data" class="section level4">
 <h4>define a stencil that represents the geographic region to slice out of the data</h4>
 <p>There are many different ways to specify geometry (<code>stencil</code>) for <code>geoknife</code>. The two basic functions that support building <code>stencil</code> objects are <code>simplegeom</code> and <code>webdata</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(geoknife)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">library</span>(geoknife)</span></code></pre></div>
 <p>Use a single longitude latitude pair as the geometry with the <code>simplegeom</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stencil &lt;-<span class="st"> </span><span class="kw">simplegeom</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">89</span>, <span class="fl">46.23</span>))</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>stencil &lt;-<span class="st"> </span><span class="kw">simplegeom</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">89</span>, <span class="fl">46.23</span>))</span></code></pre></div>
 <p>Or specify a collection of named points in a <code>data.frame</code> (note that naming is important for multi-features because it specifies how the results are filtered):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stencil &lt;-<span class="st"> </span><span class="kw">simplegeom</span>(<span class="kw">data.frame</span>(
-              <span class="st">'point1'</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">89</span>, <span class="dv">46</span>), 
-              <span class="st">'point2'</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">88.6</span>, <span class="fl">45.2</span>)))</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>stencil &lt;-<span class="st"> </span><span class="kw">simplegeom</span>(<span class="kw">data.frame</span>(</span>
+<span id="cb5-2"><a href="#cb5-2"></a>              <span class="st">&#39;point1&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">89</span>, <span class="dv">46</span>), </span>
+<span id="cb5-3"><a href="#cb5-3"></a>              <span class="st">&#39;point2&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">88.6</span>, <span class="fl">45.2</span>)))</span></code></pre></div>
 <p>Use a web-available geometry dataset with the <code>webgeom</code> function to specify state boundaries:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stencil &lt;-<span class="st"> </span><span class="kw">webgeom</span>(<span class="st">'state::New Hampshire'</span>)
-stencil &lt;-<span class="st"> </span><span class="kw">webgeom</span>(<span class="st">'state::New Hampshire,Wisconsin,Alabama'</span>)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>stencil &lt;-<span class="st"> </span><span class="kw">webgeom</span>(<span class="st">&#39;state::New Hampshire&#39;</span>)</span>
+<span id="cb6-2"><a href="#cb6-2"></a>stencil &lt;-<span class="st"> </span><span class="kw">webgeom</span>(<span class="st">&#39;state::New Hampshire,Wisconsin,Alabama&#39;</span>)</span></code></pre></div>
 <p>or HUC8s (hydrologic unit code):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stencil &lt;-<span class="st"> </span><span class="kw">webgeom</span>(<span class="st">'HUC8::09020306,14060009'</span>)</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>stencil &lt;-<span class="st"> </span><span class="kw">webgeom</span>(<span class="st">&#39;HUC8::09020306,14060009&#39;</span>)</span></code></pre></div>
 <p>display stencil:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stencil</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>stencil</span></code></pre></div>
 <pre><code>## An object of class &quot;webgeom&quot;:
 ## url: http://cida.usgs.gov/gdp/geoserver/wfs 
 ## geom: derivative:wbdhu8_alb_simp 
@@ -200,9 +422,9 @@ stencil &lt;-<span class="st"> </span><span class="kw">webgeom</span>(<span clas
 ## values: 09020306, 14060009 
 ## wfs version: 1.1.0</code></pre>
 <p>see what other HUCs could be used via the <code>query</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">HUCs &lt;-<span class="st"> </span><span class="kw">query</span>(stencil, <span class="st">'values'</span>)</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>HUCs &lt;-<span class="st"> </span><span class="kw">query</span>(stencil, <span class="st">&#39;values&#39;</span>)</span></code></pre></div>
 <p>there are thousands of results, but <code>head()</code> will only display a few of them</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(HUCs) </code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">head</span>(HUCs) </span></code></pre></div>
 <pre><code>## [1] &quot;11060006&quot; &quot;11060005&quot; &quot;11060001&quot; &quot;11060004&quot; &quot;11060003&quot;
 ## [6] &quot;11060002&quot;</code></pre>
 </div>
@@ -210,16 +432,16 @@ stencil &lt;-<span class="st"> </span><span class="kw">webgeom</span>(<span clas
 <h4>define a fabric that represents the underlying data</h4>
 <p>The Geo Data Portal’s web data catalog is quite extensive, and inludes many datasets that can all be processed with <code>geoknife</code>. Check it out at cida.usgs.gov/gdp. This is not a complete list of all relevant datasets that can be accessed and processed. The <code>geoknife</code> package has a number of quick access datasets build in (similar to quick start <code>webgeom</code> objects).</p>
 <p>An example of a quick start dataset:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fabric &lt;-<span class="st"> </span><span class="kw">webdata</span>(<span class="st">'prism'</span>)
-fabric</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>fabric &lt;-<span class="st"> </span><span class="kw">webdata</span>(<span class="st">&#39;prism&#39;</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a>fabric</span></code></pre></div>
 <pre><code>## An object of class &quot;webdata&quot;:
 ## times: 1895-01-01T00:00:00Z, 1899-01-01T00:00:00Z
 ## url: https://cida.usgs.gov/thredds/dodsC/prism_v2 
 ## variables: ppt</code></pre>
 <p>which can be a starting point for the PRISM dataset, as the fields can be modified:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">times</span>(fabric) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'2002-01-01'</span>,<span class="st">'2010-01-01'</span>)
-<span class="kw">variables</span>(fabric) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'tmx'</span>)
-fabric</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">times</span>(fabric) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;2002-01-01&#39;</span>,<span class="st">&#39;2010-01-01&#39;</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="kw">variables</span>(fabric) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;tmx&#39;</span>)</span>
+<span id="cb15-3"><a href="#cb15-3"></a>fabric</span></code></pre></div>
 <pre><code>## An object of class &quot;webdata&quot;:
 ## times: 2002-01-01T00:00:00Z, 2010-01-01T00:00:00Z
 ## url: https://cida.usgs.gov/thredds/dodsC/prism_v2 
@@ -227,22 +449,22 @@ fabric</code></pre></div>
 </div>
 <div id="create-the-processing-job-that-will-carry-out-the-subsettingsummarization-task" class="section level4">
 <h4>create the processing job that will carry out the subsetting/summarization task</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">job &lt;-<span class="st"> </span><span class="kw">geoknife</span>(stencil, fabric)</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>job &lt;-<span class="st"> </span><span class="kw">geoknife</span>(stencil, fabric)</span></code></pre></div>
 <p>use convienence functions to check on the job:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check</span>(job)
-<span class="kw">running</span>(job)
-<span class="kw">error</span>(job)
-<span class="kw">successful</span>(job)</code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">check</span>(job)</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">running</span>(job)</span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">error</span>(job)</span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="kw">successful</span>(job)</span></code></pre></div>
 <p>Cancel a running job:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">job &lt;-<span class="st"> </span><span class="kw">cancel</span>(job)</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>job &lt;-<span class="st"> </span><span class="kw">cancel</span>(job)</span></code></pre></div>
 <p>Run the job again, but have R wait until the process is finished:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">job &lt;-<span class="st"> </span><span class="kw">geoknife</span>(stencil, fabric, <span class="dt">wait =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>job &lt;-<span class="st"> </span><span class="kw">geoknife</span>(stencil, fabric, <span class="dt">wait =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p>Load up the output and plot it</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">result</span>(job)
-<span class="kw">plot</span>(data[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">ylab =</span> <span class="kw">variables</span>(fabric))</code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>data &lt;-<span class="st"> </span><span class="kw">result</span>(job)</span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="kw">plot</span>(data[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="dt">ylab =</span> <span class="kw">variables</span>(fabric))</span></code></pre></div>
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqAAAAFQCAYAAABgRsxBAAAEGWlDQ1BrQ0dDb2xvclNwYWNlR2VuZXJpY1JHQgAAOI2NVV1oHFUUPrtzZyMkzlNsNIV0qD8NJQ2TVjShtLp/3d02bpZJNtoi6GT27s6Yyc44M7v9oU9FUHwx6psUxL+3gCAo9Q/bPrQvlQol2tQgKD60+INQ6Ium65k7M5lpurHeZe58853vnnvuuWfvBei5qliWkRQBFpquLRcy4nOHj4g9K5CEh6AXBqFXUR0rXalMAjZPC3e1W99Dwntf2dXd/p+tt0YdFSBxH2Kz5qgLiI8B8KdVy3YBevqRHz/qWh72Yui3MUDEL3q44WPXw3M+fo1pZuQs4tOIBVVTaoiXEI/MxfhGDPsxsNZfoE1q66ro5aJim3XdoLFw72H+n23BaIXzbcOnz5mfPoTvYVz7KzUl5+FRxEuqkp9G/Ajia219thzg25abkRE/BpDc3pqvphHvRFys2weqvp+krbWKIX7nhDbzLOItiM8358pTwdirqpPFnMF2xLc1WvLyOwTAibpbmvHHcvttU57y5+XqNZrLe3lE/Pq8eUj2fXKfOe3pfOjzhJYtB/yll5SDFcSDiH+hRkH25+L+sdxKEAMZahrlSX8ukqMOWy/jXW2m6M9LDBc31B9LFuv6gVKg/0Szi3KAr1kGq1GMjU/aLbnq6/lRxc4XfJ98hTargX++DbMJBSiYMIe9Ck1YAxFkKEAG3xbYaKmDDgYyFK0UGYpfoWYXG+fAPPI6tJnNwb7ClP7IyF+D+bjOtCpkhz6CFrIa/I6sFtNl8auFXGMTP34sNwI/JhkgEtmDz14ySfaRcTIBInmKPE32kxyyE2Tv+thKbEVePDfW/byMM1Kmm0XdObS7oGD/MypMXFPXrCwOtoYjyyn7BV29/MZfsVzpLDdRtuIZnbpXzvlf+ev8MvYr/Gqk4H/kV/G3csdazLuyTMPsbFhzd1UabQbjFvDRmcWJxR3zcfHkVw9GfpbJmeev9F08WW8uDkaslwX6avlWGU6NRKz0g/SHtCy9J30o/ca9zX3Kfc19zn3BXQKRO8ud477hLnAfc1/G9mrzGlrfexZ5GLdn6ZZrrEohI2wVHhZywjbhUWEy8icMCGNCUdiBlq3r+xafL549HQ5jH+an+1y+LlYBifuxAvRN/lVVVOlwlCkdVm9NOL5BE4wkQ2SMlDZU97hX86EilU/lUmkQUztTE6mx1EEPh7OmdqBtAvv8HdWpbrJS6tJj3n0CWdM6busNzRV3S9KTYhqvNiqWmuroiKgYhshMjmhTh9ptWhsF7970j/SbMrsPE1suR5z7DMC+P/Hs+y7ijrQAlhyAgccjbhjPygfeBTjzhNqy28EdkUh8C+DU9+z2v/oyeH791OncxHOs5y2AtTc7nb/f73TWPkD/qwBnjX8BoJ98VQNcC+8AAEAASURBVHgB7J0F3BVV/v+Pq66rroqtrIqxioEBFuZiY6KIAZjYGCiKgoWIiY2BYIGYCBioa2NgoaKY2Lp295q78z/v7+8/d2/M5bnP89yY+HxfL3juzJ07M+d9Jr7ne74xS+DFSURABERABERABERABESgTgT+VKfj6DAiIAIiIAIiIAIiIAIiYASkgOpCEAEREAEREAEREAERqCsBKaB1xa2DiYAIiIAIiIAIiIAISAHVNSACIiACIiACIiACIlBXAlJA64pbBxMBERABERABERABEZACqmtABERABERABERABESgrgSkgNYVtw4mAiIgAiIgAiIgAiIgBVTXgAiIgAiIgAiIgAiIQF0JSAGtK24dTAREQAREQAREQAREQAqorgEREAEREAEREAEREIG6EpACWlfcOpgIiIAIiIAIiIAIiIAUUF0DIiACIiACIiACIiACdSUgBbSuuHUwERABERABERABERABKaC6BkRABERABERABERABOpKQApoXXHrYCIgAiIgAiIgAiIgAlJAdQ2IgAiIgAiIgAiIgAjUlYAU0Lri1sFEQAREQAREQAREQASkgOoaEAEREAEREAEREAERqCsBKaB1xa2DiYAIiIAIiIAIiIAISAHVNSACIiACIiACIiACIlBXAlJA64pbBxMBERABERABERABEZACqmtABERABERABERABESgrgSkgNYVtw4mAiIgAiIgAiIgAiIgBVTXgAiIgAiIgAiIgAiIQF0JSAGtK24dTAREQAREQAREQAREQAqorgEREAEREAEREAEREIG6EpACWlfcOpgIiIAIiIAIiIAIiIAUUF0DIiACIiACIiACIiACdSUgBbSuuHUwERABERABERABERABKaC6BkRABERABERABERABOpKQApoXXHrYCIgAiIgAiIgAiIgAlJAdQ2IgAiIgAiIgAiIgAjUlYAU0Lri1sFEQAREQAREQAREQASkgOoaEAEREAEREAEREAERqCsBKaB1xa2DiYAIiIAIiIAIiIAISAHVNSACIiACIiACIiACIlBXAlJA64pbBxMBERABERABERABEZACqmtABERABERABERABESgrgSkgNYVtw4mAiIgAiIgAiIgAiIgBVTXgAiIgAiIgAiIgAiIQF0JSAGtK24dTAREQAREQAREQAREQAqorgEREAEREAEREAEREIG6EpACWlfcOpgIiIAIiIAIiIAIiIAUUF0DIiACIiACIiACIiACdSUgBbSuuHUwERABERABERABERABKaC6BkRABERABERABERABOpKQApoXXHrYCIgAiIgAiIgAiIgAlJAdQ2IgAiIgAiIgAiIgAjUlYAU0Lri1sFEQAREQAREQAREQASkgOoaEAEREAEREAEREAERqCsBKaB1xa2DiYAIiIAIiIAIiIAISAHVNSACIiACIiACIiACIlBXAlJA64pbBxMBERABERABERABEZACqmtABERABERABERABESgrgSkgNYVtw4mAiIgAiIgAiIgAiIgBVTXgAiIgAiIgAiIgAiIQF0JSAGtK24dTAREQAREQAREQAREQAqorgEREAEREAEREAEREIG6EpACWlfcOpgIiIAIiIAIiIAIiIAUUF0DIiACIiACIiACIiACdSUgBbSuuHUwERABERABERABERABKaC6BkRABERABERABERABOpKQApoXXHrYCIgAiIgAiIgAiIgAlJAdQ2IgAiIgAiIgAiIgAjUlYAU0Lri1sFEQAREQAREQAREQASkgOoaEAEREAEREAEREAERqCsBKaB1xa2DiYAIiIAIiIAIiIAISAHVNSACIiACIiACIiACIlBXAlJA64pbBxMBERABERABERABEZACqmtABERABERABERABESgrgSkgNYVtw4mAiIgAiIgAiIgAiIgBVTXgAiIgAiIgAiIgAiIQF0JSAGtK24dTAREQAREQAREQAREIPEKaBAE7osvvnBff/21elMEREAEREAEREAERCABBBKpgH700UfuuOOOc0svvbT785//7BZZZBG34IILuvnmm8+tvvrq7uijj3Y//vhjAvDrFEVABERABERABEQgewRm8RbEIEnNfv/9992GG27oZpllFrfLLru4ZZdd1i2wwAK2jBX03XffdePHj3c068EHH3TLLbdckpqncxUBERABERABERCB1BNInAJ62GGHuenTp7sHHnjAzTHHHJEd9Pvvv7utt97abbDBBm7IkCGR22ilCIiACIiACIiACIhAYwjM1pjDtvyoL7zwgtt7773LKp/sefbZZ3f77LOPu/jii2umgA4fPtyNGDHCpv1b3hr9UgREQAREQAREQASqS+Avf/mLmzRpkptnnnmqu+Mq7i1xCuj666/vHn/8cXfAAQfMFMNDDz3k/va3v810m9Z8OXbsWHfhhRdKAW0NRP1WBERABERABESg6gQ22WQT984771hcTNV3XqUdJk4B7dWrl0MJ/eyzz1zv3r3Nx5MApD/96U8WCf/ee++566+/3t199902TV8lTiW7mW222dy8887rOnfuXPKdVoiACIhAUggwoH/iiSds5mjzzTd3HTp0SMqp6zxFQATKEFhhhRXKfBOf1YlTQNdYYw334osvuoMOOsim4v/73/+W0OQhet9997l//OMfJd81tQLFdsaMGU1t5j7//HNL/9TkhtpABERABGJIgEBNAjlffvllt91227lff/3VHXXUUe6kk05yp556agzPWKckAiKQJgKJU0CB//e//90i3H/77Tf3r3/9y2H1JPCobdu2bokllrCUTC3tpGnTprmzzz67yZ9zzOeff97tsMMOTW4b5w3++OMP8xPBCkJKq80228z+xfmcdW4iIAKtJ9CjRw83ceJE95///MdmkNjjGWecYTM7zCr169ev9QfRHkRABESgDIFEKqBhW1CYUEb5h/Ag/fTTT8OvW/SX6Hn+NSU49qLwJlmwHmMtRgnt1q2bWUBY3mOPPdy1115rqa2S3D6duwiIQDSB77//3pRP/uK+FArPNQbWO+20kzv88MMLvgu30V8REAERqAaBRCqgKJm33HKL+XzutttubsUVV3SDBw92l112mfvyyy/d4osvbhHqKFWS8gQ23nhj9+qrrxZUkRo4cKD5guE/wlScRAREIH0EmMFZbbXVIiNkKebx8ccfWy7l9LVcLRIBEYgLgf8NfeNyRk2cB8on+T379+/vhg0bZgFJV1xxhX3eaqutLDKd6Pedd97ZPfvss03sLbtff/XVV5ZN4JNPPimAQHDVa6+9Zsp8lH9twcYpX8BHDqt61jmkvJsz2bxFF13UlEyu72LhmUBVuXzL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MzHdphMVARFoBYG1117bTZw4sWQPDMSxjGahFnpJ4zO2QhbQjHW4misCIiACIiACjSZAzuMOHTqYFbRv3752OmT+oCRvnz593LLLLtvoU9Txa0xACmiNAWv3IiACIiACIiAChQTwe3/77bct6JJiHFSFIyK+d+/elgWhcGstpZGAFNA09qraJAIiIAIiIAIxJ4CVE6snNeK///5784FHEZVkg4AU0Bb2MwmSJ0+ebCO2Fu6i4Gcffvih5blbYoklCtZrIRsEfvzxR8c/kjFLskeAl/BXX33ldP9nr+9pse7/bPZ72Gruf5Lyh+n4wvWt+fv111+35ud1+a0U0BZivuyyy9zo0aOrVqubsoskH1fkXws7JOE/++677xz/vvnmm4S3RKffEgJUxfrss890/7cEXgp+o/s/BZ3YiiZw/zMAbd++fSv2UvjTfv36mY9t4dp4Lc0SeInXKWXzbB577DFHYl5V+8hm/1MRibrwt9xySzYBZLzVuv+zfQHo/s92/2f1/lcapmxf92q9CIiACIiACIiACNSdgBTQuiPXAUVABERABERABEQg2wSkgGa7/9V6ERABERABERABEag7ASmgdUeuA4qACIiACIiACIhAtglIAc12/6v1IiACIiACIiACIlB3AlJA645cBxQBERABERABERCBbBOQAprt/lfrRUAEREAEREAERKDuBKSA1h25DigCIiACIiACIiAC2SagRPQx6f+wEgq1cSXZIxBWQllqqaWy13i12On+z/ZFoPs/2/2f1ftfCmi2r3u1XgREQAREQAREQATqTkBT8HVHrgOKgAiIgAiIgAiIQLYJSAHNdv+r9SIgAiIgAiIgAiJQdwJSQOuOXAcUAREQAREQAREQgWwTkAKa7f5X60VABERABERABESg7gSkgNYduQ4oAiIgAiIgAiIgAtkmIAU02/2v1ouACIiACIiACIhA3QlIAa07ch1QBERABERABERABLJNQApotvtfrRcBERABERABERCBuhOQAlp35DqgCIiACIiACIiACGSbgBTQbPe/Wi8CIiACIiACIiACdScgBbQGyP/73/82udcgCKqyTSXHavJA2qCqBCrpk2r1f1VPXDurCoF69n8l11FVGqWdVEygnv1fybEqPnFtWBUClfRJpfftzz//PNNzqnQ/M91JA7+UAlpF+DfeeKPr0KGDm2OO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IAIiIAIZJCAFNIOdriaLgAiIgAiIgAiIQCMJSAFtJH0dWwREQAREQAREQAQySEAKaAY7XU0WAREQAREQAREQgUYSkALaSPo6tgiIgAiIgAiIgAhkkIAU0Ax2uposAiIgAiIgAiIgAo0kIAW0kfR1bBEQAREQAREQARHIIAEpoBnsdDVZBERABERABERABBpJQApoI+nr2CIgAiIgAiIgAiKQQQJSQDPY6WqyCIiACIiACIiACDSSgBTQRtLXsUVABERABERABEQggwSkgGaw09VkERABERABERABEWgkASmgjaSvY4uACIiACIiACIhABglIAc1gp6vJIiACIiACIiACItBIAlJAG0lfxxYBERABERABERCBDBKQAprBTleTRUAEREAEREAERKCRBKSANpK+ji0CIiACIiACIiACGSQgBTSDna4mi4AIiIAIiIAIiEAjCUgBbSR9HVsEREAEREAEREAEMkhACmgGO11NFgEREAEREAEREIFGEpAC2kj6OrYIiEDDCQwfPtzNMsssuX+zzjqrW3jhhd1aa63lrr32Wvef//yn2ef49NNPuylTplT8u3333Td3/Pxzyf983nnn2f7mn39+d/bZZ1e8b20oAiIgAnEkMFscT0rnJAIiIAL1JnDZZZe5eeaZx/3xxx/uo48+MgVy7733dlOnTnWXXHJJxafD79dbbz139dVXuw033LCi3x144IFus802y207YMAA165dO3fYYYfl1q255pr2effdd3cdOnTIrdcHERABEUgiASmgSew1nbMIiEDVCfTo0cMsn+GOgyBw/fv3dxdddJHbcccd3eabbx5+NdO//I5/zREUVv6FMnToUFNA99hjj3BV7u+IESNyn/VBBERABJJKQFPwSe05nbcIiEBNCTD9zbT34osv7kaOHJk71q+//uoGDRrkVlttNTf33HO7FVZYwfXr18/9+9//tn+dO3e2bU855RS311575X730ksvuS233NItsMACbvnll3fHH3+8+/3333PfV/qhS5cubvTo0bY5iuqJJ55o1lbOp23btmY1RQHGarviiiu6VVZZxZ1//vkFu//xxx9d37593dJLL+0WWmghU7Dff//9gm20IAIiIAK1JCALaC3pat8iIAKJJvCnP/3JofChPIaCUjl58mTHNPlyyy3n7rnnHocfaZs2bdxJJ53kDj/8cIdPJ8omllPktddec+uuu25OGfztt9/cCSec4N5991134403hruu6O/06dPdZ599ZtuiNN555512bJRgzvPSSy91r776qvv000/doYceap+PPvpot8kmm7iOHTuadZbp/vfee88dfPDBbo011nAXXnihW3vttd2MGTNMQa7oRLSRCIiACLSCgBTQVsDTT0VABNJPYJFFFnFvvvmm++9//+t++eUX+4zl8aCDDrLGd+/e3T377LPuiSeecLPNNpvr3bu3KaDrr7++22abbWwbrJRzzTWX+ZXOMccctm7BBRd0TPujyHbq1KnFIFFGH330UbPEspN7773XFOS3337bLbvssrbfu+++2xRVFNCbb77Z/FpZt/XWW9v3Xbt2NfeDc889151xxhm2Tv+JgAiIQC0JSAGtJV3tWwREIPEEfvjhB0dkPNZQlMhp06ZZmwg2euutt9wLL7zgsGgyBV9OUBA32GAD99xzz+U2mW+++WyfTz31VKsUUBRk3ABCIUDpz3/+c075ZD1T85wr8thjjzmOTcAVSnMoq6++esFyuF5/RUAERKAWBKSA1oKq9ikCIpAaAkxVE5EeyuOPP27+myiO+HDie4lP5bzzzhtuUvAXxfTLL790d9xxh/0r+NIvsP/WyN/+9reCn6MsL7XUUiXrwhUc77vvvnMbbbRRuCr3F59QiQiIgAjUg4CCkOpBWccQARFIJIFvv/3WrJZMXSOkZ2LaGmvoLbfc4r766iuzgK666qpl2zfnnHM6/uGHyTR+8b9hw4aV/W0lX6BwNkeY+kehJr9p8bm88847zdmVthUBERCBFhOQAtpidPqhCIhA2gkMHjzYoYSG+TiZvmZKnpyhO+ywgyMpPFPxBP+ECetRTpFwmWj6lVde2Y0bN87Wh8nl33jjDcv9+eSTT9r6ev1HVDzBSyTLD8+FqPlevXo5fEAlIiACIlAPAlJA60FZxxABEYg9gbFjx7orrrjCkWeTCHWmqIluJ11RmFoJP04sjmPGjHE//fSTTZ+TrB6FjmWE7//yl7+4++67z5Q81rG/Dz74wIKTiFB//vnnXZ8+fdwXX3xh0edsUy8heAorKBHyuAV8/PHHbuDAgWbRrTTXab3OVccRARFILwEpoOntW7VMBESgGQSYIqciEYoZiigWTP7mV0FacsklHfk9r7vuOkt91L59e1PmSGNEpPw333xjRzzkkEPcxIkT3fbbb2/LO+20kxs1apSbNGmSpWJCkcV6Sj5PIufrKaSLeuCBB+yQ3bp1c0sssYR78MEHLX1T6GpQz/PRsURABLJJYBY/9dK8kh3Z5KRWi4AIiECOAI9NgnlQ3mafffbc+vwPP//8s/lYkqw+X/71r39ZyiP8QhstuBeQWmqxxRZr9Kno+CIgAhkjIAU0Yx2u5oqACIiACIiACIhAowloCr7RPaDji4AIiIAIiIAIiEDGCEgBzViHq7kiIAIiIAIiIAIi0GgCUkAb3QM6vgiIgAiIgAiIgAhkjIAU0Ix1uJorAiIgAiIgAiIgAo0mIAW00T2g44uACIiACIiACIhAxghIAc1Yh6u5IiACIiACIiACItBoAlJAG90DOr4IiIAIiIAIiIAIZIyAFNCMdbiaKwIiIAIiIAIiIAKNJiAFtNE9oOOLgAiIgAiIgAiIQMYISAHNWIeruSIgAiIgAiIgAiLQaAJSQBvdAzq+CIiACIiACIiACGSMgBTQjHW4misCIiACIiACIiACjSYgBbTRPaDji4AIiIAIiIAIiEDGCEgBzViHq7kiIAIiIAIiIAIi0GgCUkAb3QM6vgiIgAiIgAiIgAhkjIAU0Ix1uJorAiIgAiIgAiIgAo0mIAW00T2g44uACIiACIiACIhAxghIAc1Yh6u5IiACIiACIiACItBoAv+v3TqmAQAAQBjm3zUydlAFhPLggNYLyCdAgAABAgQInAk4oGeDq0uAAAECBAgQqAUc0HoB+QQIECBAgACBMwEH9GxwdQkQIECAAAECtcAA6VdqCh6QAgIAAAAASUVORK5CYII=" /><!-- --></p>
 <p>For long running processes, it often makes sense to use an email listener:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">job &lt;-<span class="st"> </span><span class="kw">geoknife</span>(<span class="kw">webgeom</span>(<span class="st">'state::Wisconsin'</span>), <span class="dt">fabric =</span> <span class="st">'prism'</span>, <span class="dt">email =</span> <span class="st">'fake.email@gmail.com'</span>)</code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>job &lt;-<span class="st"> </span><span class="kw">geoknife</span>(<span class="kw">webgeom</span>(<span class="st">&#39;state::Wisconsin&#39;</span>), <span class="dt">fabric =</span> <span class="st">&#39;prism&#39;</span>, <span class="dt">email =</span> <span class="st">&#39;fake.email@gmail.com&#39;</span>)</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -253,22 +475,22 @@ fabric</code></pre></div>
 <h3><code>simplegeom</code> object</h3>
 <p>The <code>simplegeom</code> class is designed to hold spatial information from the R environment and make it available to the processing engine. <code>simplegeom</code> is effectively a wrapper for the <code>sp</code> package’s <code>SpatialPolygons</code> class, but also coerces a number of different other types into this class. For example:</p>
 <p>Points can be specified as longitude latitude pairs:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stencil &lt;-<span class="st"> </span><span class="kw">simplegeom</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">89</span>, <span class="fl">45.43</span>))</code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>stencil &lt;-<span class="st"> </span><span class="kw">simplegeom</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">89</span>, <span class="fl">45.43</span>))</span></code></pre></div>
 <p>or as a data.frame:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stencil &lt;-<span class="st"> </span><span class="kw">simplegeom</span>(<span class="kw">data.frame</span>(
-              <span class="st">'point1'</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">89</span>, <span class="dv">46</span>), 
-              <span class="st">'point2'</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">88.6</span>, <span class="fl">45.2</span>)))</code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>stencil &lt;-<span class="st"> </span><span class="kw">simplegeom</span>(<span class="kw">data.frame</span>(</span>
+<span id="cb24-2"><a href="#cb24-2"></a>              <span class="st">&#39;point1&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">89</span>, <span class="dv">46</span>), </span>
+<span id="cb24-3"><a href="#cb24-3"></a>              <span class="st">&#39;point2&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">88.6</span>, <span class="fl">45.2</span>)))</span></code></pre></div>
 <p>Also, a <code>SpatialPolygons</code> object can be used as well (example from <code>sp</code> package):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sp)
-Sr1 =<span class="st"> </span><span class="kw">Polygon</span>(<span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">2</span>),<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">2</span>)))
-Sr2 =<span class="st"> </span><span class="kw">Polygon</span>(<span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">5</span>),<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>)))
-Sr3 =<span class="st"> </span><span class="kw">Polygon</span>(<span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">4</span>),<span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">5</span>)))
-Sr4 =<span class="st"> </span><span class="kw">Polygon</span>(<span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">5</span>),<span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>)), <span class="dt">hole =</span> <span class="ot">TRUE</span>)
-
-Srs1 =<span class="st"> </span><span class="kw">Polygons</span>(<span class="kw">list</span>(Sr1), <span class="st">&quot;s1&quot;</span>)
-Srs2 =<span class="st"> </span><span class="kw">Polygons</span>(<span class="kw">list</span>(Sr2), <span class="st">&quot;s2&quot;</span>)
-Srs3 =<span class="st"> </span><span class="kw">Polygons</span>(<span class="kw">list</span>(Sr3, Sr4), <span class="st">&quot;s3/4&quot;</span>)
-stencil &lt;-<span class="st"> </span><span class="kw">simplegeom</span>(<span class="dt">Srl =</span> <span class="kw">list</span>(Srs1,Srs2,Srs3), <span class="dt">proj4string =</span> <span class="kw">CRS</span>(<span class="st">&quot;+proj=longlat +datum=WGS84&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">library</span>(sp)</span>
+<span id="cb25-2"><a href="#cb25-2"></a>Sr1 =<span class="st"> </span><span class="kw">Polygon</span>(<span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">2</span>),<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">2</span>)))</span>
+<span id="cb25-3"><a href="#cb25-3"></a>Sr2 =<span class="st"> </span><span class="kw">Polygon</span>(<span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">5</span>),<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>)))</span>
+<span id="cb25-4"><a href="#cb25-4"></a>Sr3 =<span class="st"> </span><span class="kw">Polygon</span>(<span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">4</span>),<span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">5</span>)))</span>
+<span id="cb25-5"><a href="#cb25-5"></a>Sr4 =<span class="st"> </span><span class="kw">Polygon</span>(<span class="kw">cbind</span>(<span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">5</span>),<span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>)), <span class="dt">hole =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb25-6"><a href="#cb25-6"></a></span>
+<span id="cb25-7"><a href="#cb25-7"></a>Srs1 =<span class="st"> </span><span class="kw">Polygons</span>(<span class="kw">list</span>(Sr1), <span class="st">&quot;s1&quot;</span>)</span>
+<span id="cb25-8"><a href="#cb25-8"></a>Srs2 =<span class="st"> </span><span class="kw">Polygons</span>(<span class="kw">list</span>(Sr2), <span class="st">&quot;s2&quot;</span>)</span>
+<span id="cb25-9"><a href="#cb25-9"></a>Srs3 =<span class="st"> </span><span class="kw">Polygons</span>(<span class="kw">list</span>(Sr3, Sr4), <span class="st">&quot;s3/4&quot;</span>)</span>
+<span id="cb25-10"><a href="#cb25-10"></a>stencil &lt;-<span class="st"> </span><span class="kw">simplegeom</span>(<span class="dt">Srl =</span> <span class="kw">list</span>(Srs1,Srs2,Srs3), <span class="dt">proj4string =</span> <span class="kw">CRS</span>(<span class="st">&quot;+proj=longlat +datum=WGS84&quot;</span>))</span></code></pre></div>
 </div>
 <div id="webgeom-object" class="section level3">
 <h3><code>webgeom</code> object</h3>
@@ -282,9 +504,9 @@ stencil &lt;-<span class="st"> </span><span class="kw">simplegeom</span>(<span c
 <li><code>version</code>: the WFS version to use.</li>
 </ul>
 <p>To create a default <code>webgeom</code> object:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stencil &lt;-<span class="st"> </span><span class="kw">webgeom</span>()</code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>stencil &lt;-<span class="st"> </span><span class="kw">webgeom</span>()</span></code></pre></div>
 <p>The user-level information in webgeom is all available with the webgeom “show” method (or print).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stencil</code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>stencil</span></code></pre></div>
 <pre><code>## An object of class &quot;webgeom&quot;:
 ## url: https://cida.usgs.gov/gdp/geoserver/wfs 
 ## geom: NA 
@@ -292,22 +514,22 @@ stencil &lt;-<span class="st"> </span><span class="kw">simplegeom</span>(<span c
 ## values: NA 
 ## wfs version: 1.1.0</code></pre>
 <p>The public fields can be accessed in by using the field name:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">geom</span>(stencil) &lt;-<span class="st"> &quot;sample:CONUS_states&quot;</span>
-<span class="kw">attribute</span>(stencil) &lt;-<span class="st"> &quot;STATE&quot;</span>
-<span class="kw">values</span>(stencil) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Wisconsin&quot;</span>,<span class="st">&quot;Maine&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw">geom</span>(stencil) &lt;-<span class="st"> &quot;sample:CONUS_states&quot;</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="kw">attribute</span>(stencil) &lt;-<span class="st"> &quot;STATE&quot;</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="kw">values</span>(stencil) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Wisconsin&quot;</span>,<span class="st">&quot;Maine&quot;</span>)</span></code></pre></div>
 </div>
 <div id="quick-access-to-web-available-data-for-webgeoms" class="section level3">
 <h3>quick access to web available data for webgeoms</h3>
 <p>There are some built in <code>webgeom</code> templates that can be used to figure out the pattern, or to use these datasets for analysis. Currently, the package only supports US States, Level III Ecoregions, or HUC8s:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stencil &lt;-<span class="st"> </span><span class="kw">webgeom</span>(<span class="st">'state::Wisconsin'</span>)
-<span class="kw">webgeom</span>(<span class="st">'state::Wisconsin,Maine'</span>)
-<span class="kw">webgeom</span>(<span class="st">'HUC8::09020306,14060009'</span>)
-<span class="kw">webgeom</span>(<span class="st">'ecoregion::Colorado Plateaus,Driftless Area'</span>)</code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>stencil &lt;-<span class="st"> </span><span class="kw">webgeom</span>(<span class="st">&#39;state::Wisconsin&#39;</span>)</span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="kw">webgeom</span>(<span class="st">&#39;state::Wisconsin,Maine&#39;</span>)</span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="kw">webgeom</span>(<span class="st">&#39;HUC8::09020306,14060009&#39;</span>)</span>
+<span id="cb30-4"><a href="#cb30-4"></a><span class="kw">webgeom</span>(<span class="st">&#39;ecoregion::Colorado Plateaus,Driftless Area&#39;</span>)</span></code></pre></div>
 </div>
 <div id="query-function-for-webgeom" class="section level3">
 <h3>query function for <code>webgeom</code></h3>
 <p>The <code>query</code> function on <code>webgeom</code> can be used to find possible inputs for each public field (other than <code>version</code> and <code>url</code> currently):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">query</span>(stencil, <span class="st">'geoms'</span>)</code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw">query</span>(stencil, <span class="st">&#39;geoms&#39;</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;sample:Alaska&quot;                  
 ##  [2] &quot;upload:CIDA_TEST_&quot;              
 ##  [3] &quot;sample:CONUS_Climate_Divisions&quot; 
@@ -324,13 +546,13 @@ stencil &lt;-<span class="st"> </span><span class="kw">simplegeom</span>(<span c
 ## [15] &quot;upload:nrhu_selection_Gallatin&quot; 
 ## [16] &quot;sample:simplified_HUC8s&quot;        
 ## [17] &quot;draw:test&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">query</span>(stencil, <span class="st">'attributes'</span>)</code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="kw">query</span>(stencil, <span class="st">&#39;attributes&#39;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;STATE&quot;</code></pre>
 </div>
 </div>
 <div id="gridded-data-fabric" class="section level2">
 <h2>gridded data (<code>fabric</code>)</h2>
-<p>The <code>fabric</code> concept in <code>geoknife</code> represents the gridded dataset that will be operated on by the tool. <code>fabric</code> can be a time-varying dataset (such as PRISM) or a spatial snapshot coverage dataset (such as the NLCD). At present, <code>fabric</code> is limited to datasets that can be accessed using the OPeNDAP protocol or WMS (web map service). Most helper functions in geoknife, including <code>query(fabric,'variables')</code> tend to work better for OPeNDAP datasets.</p>
+<p>The <code>fabric</code> concept in <code>geoknife</code> represents the gridded dataset that will be operated on by the tool. <code>fabric</code> can be a time-varying dataset (such as PRISM) or a spatial snapshot coverage dataset (such as the NLCD). At present, <code>fabric</code> is limited to datasets that can be accessed using the OPeNDAP protocol or WMS (web map service). Most helper functions in geoknife, including <code>query(fabric,&#39;variables&#39;)</code> tend to work better for OPeNDAP datasets.</p>
 <div id="webdata-object" class="section level3">
 <h3><code>webdata</code> object</h3>
 <p>The <code>webdata</code> class holds all the important information for webdatasets in order to make them available for processing by geoknife’s outsourced geoprocessing engine, the Geo Data Portal. Public fields in <code>webdata</code>:</p>
@@ -340,29 +562,29 @@ stencil &lt;-<span class="st"> </span><span class="kw">simplegeom</span>(<span c
 <li><code>variables</code>: a character vector for the variables of the dataset to use. Must be valid variables that exist within the dataset specified with <code>url</code>.</li>
 </ul>
 <p>To create a default <code>webdata</code> object:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fabric &lt;-<span class="st"> </span><span class="kw">webdata</span>()</code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>fabric &lt;-<span class="st"> </span><span class="kw">webdata</span>()</span></code></pre></div>
 <p>The user-level information in webdata is all available with the webdata “show” method (or print).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fabric</code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>fabric</span></code></pre></div>
 <pre><code>## An object of class &quot;webdata&quot;:
 ## times: NA, NA
 ## url: NA 
 ## variables: NA</code></pre>
 <p>The public fields can be accessed in by using the field name:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">times</span>(fabric)</code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">times</span>(fabric)</span></code></pre></div>
 <pre><code>## [1] NA NA</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">url</span>(fabric) &lt;-<span class="st"> 'https://cida.usgs.gov/thredds/dodsC/prism'</span>
-<span class="kw">variables</span>(fabric) &lt;-<span class="st"> 'tmx'</span>
-
-<span class="kw">times</span>(fabric)[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(<span class="st">'1990-01-01'</span>)</code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="kw">url</span>(fabric) &lt;-<span class="st"> &#39;https://cida.usgs.gov/thredds/dodsC/prism&#39;</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="kw">variables</span>(fabric) &lt;-<span class="st"> &#39;tmx&#39;</span></span>
+<span id="cb40-3"><a href="#cb40-3"></a></span>
+<span id="cb40-4"><a href="#cb40-4"></a><span class="kw">times</span>(fabric)[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(<span class="st">&#39;1990-01-01&#39;</span>)</span></code></pre></div>
 </div>
 <div id="find-data-that-is-indexed-by-the-geo-data-portal-catalog" class="section level3">
 <h3>find data that is indexed by the Geo Data Portal catalog</h3>
 <p>The <code>fabric</code> is specified using the <code>webdata</code> function. <code>geoknife</code> can access a catalog of webdata by using the <code>query</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">webdatasets =<span class="st"> </span><span class="kw">query</span>(<span class="st">'webdata'</span>)
-<span class="kw">length</span>(webdatasets)</code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>webdatasets =<span class="st"> </span><span class="kw">query</span>(<span class="st">&#39;webdata&#39;</span>)</span>
+<span id="cb41-2"><a href="#cb41-2"></a><span class="kw">length</span>(webdatasets)</span></code></pre></div>
 <pre><code>## [1] 190</code></pre>
 <p>Interrogating datasets can be done by printing the returned dataset list, which displays the title and the url of each dataset by default (this example truncates the 190 datasets to display 5):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">webdatasets[<span class="dv">61</span><span class="op">:</span><span class="dv">65</span>]</code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>webdatasets[<span class="dv">61</span><span class="op">:</span><span class="dv">65</span>]</span></code></pre></div>
 <pre><code>## An object of class &quot;datagroup&quot;:
 ## [1] Eighth degree-CONUS Daily Downscaled Climate Projections Minimum and Maximum Temperature 
 ##   url: http://cida.usgs.gov/thredds/dodsC/dcp/conus_t 
@@ -375,33 +597,33 @@ stencil &lt;-<span class="st"> </span><span class="kw">simplegeom</span>(<span c
 ## [5] GLDAS Version 2.0 Noah 1.0 degree 3-hourly data 
 ##   url: http://hydro1.sci.gsfc.nasa.gov/dods/GLDAS_NOAH10_3H.020</code></pre>
 <p>Finding additional information about a particular dataset is supported by <code>title()</code> and <code>abstract()</code>, which return the dataset titles and abstracts respectively:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">title</span>(webdatasets[<span class="dv">87</span>])</code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="kw">title</span>(webdatasets[<span class="dv">87</span>])</span></code></pre></div>
 <pre><code>## [1] &quot;North Central River Forecasting Center - Quantitative Precipitation Estimate Archive&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">abstract</span>(webdatasets[<span class="dv">87</span>])</code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="kw">abstract</span>(webdatasets[<span class="dv">87</span>])</span></code></pre></div>
 <pre><code>## [1] &quot;Radar indicated-rain gage verified and corrected hourly precipitation estimate on a corrected ~4km HRAP grid.&quot;</code></pre>
 <p>indexing datasets based on order or title are equivalent</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fabric &lt;-<span class="st"> </span><span class="kw">webdata</span>(webdatasets[<span class="dv">99</span>])
-evapotran &lt;-<span class="st"> </span><span class="kw">webdata</span>(webdatasets[<span class="st">'Monthly Conterminous U.S. actual evapotranspiration data'</span>])</code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>fabric &lt;-<span class="st"> </span><span class="kw">webdata</span>(webdatasets[<span class="dv">99</span>])</span>
+<span id="cb49-2"><a href="#cb49-2"></a>evapotran &lt;-<span class="st"> </span><span class="kw">webdata</span>(webdatasets[<span class="st">&#39;Monthly Conterminous U.S. actual evapotranspiration data&#39;</span>])</span></code></pre></div>
 <p>To modify the times in <code>fabric</code>, use <code>times()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">times</span>(fabric) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'1990-01-01'</span>,<span class="st">'2005-01-01'</span>)</code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">times</span>(fabric) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;1990-01-01&#39;</span>,<span class="st">&#39;2005-01-01&#39;</span>)</span></code></pre></div>
 <p>Similar to <code>webgeom</code>, the query method can be used on <code>webdata</code> objects:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">query</span>(fabric, <span class="st">'times'</span>)
-<span class="kw">query</span>(fabric, <span class="st">'variables'</span>)</code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="kw">query</span>(fabric, <span class="st">&#39;times&#39;</span>)</span>
+<span id="cb51-2"><a href="#cb51-2"></a><span class="kw">query</span>(fabric, <span class="st">&#39;variables&#39;</span>)</span></code></pre></div>
 </div>
 <div id="find-data-that-is-not-indexed-by-the-geo-data-portal-catalog" class="section level3">
 <h3>find data that is <em>not</em> indexed by the Geo Data Portal catalog</h3>
 <p>There are hundreds (or potentially thousands) of additional OPeNDAP datasets that will work with geoknife, but need to be found through web searches or catalogs (e.g., www.esrl.noaa.gov/psd/thredds/dodsC/Datasets, apdrc.soest.hawaii.edu/data/data.php). One such example is Sea Surface Temperature from the Advanced Very High Resolution Radiometer (AVHRR) temperature sensing system. Specifying datasets such as this requires finding out the OPeNDAP endpoint (URL) for the dataset, and specifying it as the <code>url</code> to webdata (we found this example in the extensive apdrc.soest.hawaii.edu/data/data.php catalog):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fabric =<span class="st"> </span><span class="kw">webdata</span>(<span class="dt">url=</span><span class="st">'dods://apdrc.soest.hawaii.edu/dods/public_data/satellite_product/AVHRR/avhrr_mon'</span>)</code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>fabric =<span class="st"> </span><span class="kw">webdata</span>(<span class="dt">url=</span><span class="st">&#39;dods://apdrc.soest.hawaii.edu/dods/public_data/satellite_product/AVHRR/avhrr_mon&#39;</span>)</span></code></pre></div>
 <p><code>query</code> for <code>variables</code> doesn’t work for this dataset, because it actually doesn’t have units and therefore “valid” variables are not returned (instead you get an empty list). From the OPeNDAP endpoint, it is clear that this dataset has one variable of interest, which is called ‘sst’:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">variables</span>(fabric) &lt;-<span class="st"> 'sst'</span>
-<span class="kw">query</span>(fabric, <span class="st">'times'</span>)</code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="kw">variables</span>(fabric) &lt;-<span class="st"> &#39;sst&#39;</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a><span class="kw">query</span>(fabric, <span class="st">&#39;times&#39;</span>)</span></code></pre></div>
 <pre><code>[1] &quot;1985-01-01 UTC&quot; &quot;2003-05-01 UTC&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">times</span>(fabric) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">'1990-01-01'</span>,<span class="st">'1999-12-31'</span>)</code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="kw">times</span>(fabric) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;1990-01-01&#39;</span>,<span class="st">&#39;1999-12-31&#39;</span>)</span></code></pre></div>
 <p>plotting the July surface temperature of a spot on the Caspian Sea is done by:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sst =<span class="st"> </span><span class="kw">result</span>(<span class="kw">geoknife</span>(<span class="kw">data.frame</span>(<span class="st">'caspian.sea'</span>=<span class="kw">c</span>(<span class="dv">51</span>,<span class="dv">40</span>)), fabric, <span class="dt">wait =</span> <span class="ot">TRUE</span>))
-<span class="kw">head</span>(sst)
-july.idx &lt;-<span class="st"> </span><span class="kw">months</span>(sst<span class="op">$</span>DateTime) <span class="op">==</span><span class="st"> 'July'</span>
-<span class="kw">plot</span>(sst<span class="op">$</span>DateTime[july.idx], sst<span class="op">$</span>caspian.sea[july.idx], <span class="dt">type=</span><span class="st">'l'</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">'dodgerblue'</span>, <span class="dt">ylab=</span><span class="st">'Sea Surface Temperature (degC)'</span>,<span class="dt">xlab=</span><span class="ot">NA</span>)</code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>sst =<span class="st"> </span><span class="kw">result</span>(<span class="kw">geoknife</span>(<span class="kw">data.frame</span>(<span class="st">&#39;caspian.sea&#39;</span>=<span class="kw">c</span>(<span class="dv">51</span>,<span class="dv">40</span>)), fabric, <span class="dt">wait =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb56-2"><a href="#cb56-2"></a><span class="kw">head</span>(sst)</span>
+<span id="cb56-3"><a href="#cb56-3"></a>july.idx &lt;-<span class="st"> </span><span class="kw">months</span>(sst<span class="op">$</span>DateTime) <span class="op">==</span><span class="st"> &#39;July&#39;</span></span>
+<span id="cb56-4"><a href="#cb56-4"></a><span class="kw">plot</span>(sst<span class="op">$</span>DateTime[july.idx], sst<span class="op">$</span>caspian.sea[july.idx], <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;dodgerblue&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Sea Surface Temperature (degC)&#39;</span>,<span class="dt">xlab=</span><span class="ot">NA</span>)</span></code></pre></div>
 <pre><code>##     DateTime caspian.sea variable statistic
 ## 1 1990-01-01      11.250      sst      MEAN
 ## 2 1990-02-01      10.575      sst      MEAN
@@ -414,17 +636,17 @@ july.idx &lt;-<span class="st"> </span><span class="kw">months</span>(sst<span c
 <div id="query-function-for-webdata" class="section level3">
 <h3>query function for <code>webdata</code></h3>
 <p>The <code>query</code> function works on <code>webdata</code>, similar to how it works for <code>webgeom</code> objects. For the PRISM dataset specified above, the time range of the dataset can come from <code>query</code> with <code>times</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fabric =<span class="st"> </span><span class="kw">webdata</span>(<span class="st">'prism'</span>)
-<span class="kw">variables</span>(fabric) &lt;-<span class="st"> 'ppt'</span>
-<span class="kw">query</span>(fabric, <span class="st">'times'</span>)</code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>fabric =<span class="st"> </span><span class="kw">webdata</span>(<span class="st">&#39;prism&#39;</span>)</span>
+<span id="cb58-2"><a href="#cb58-2"></a><span class="kw">variables</span>(fabric) &lt;-<span class="st"> &#39;ppt&#39;</span></span>
+<span id="cb58-3"><a href="#cb58-3"></a><span class="kw">query</span>(fabric, <span class="st">&#39;times&#39;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;1895-01-01 UTC&quot; &quot;2013-02-01 UTC&quot;</code></pre>
 <p>likewise, variables with <code>variables</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">query</span>(fabric, <span class="st">'variables'</span>)</code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="kw">query</span>(fabric, <span class="st">&#39;variables&#39;</span>)</span></code></pre></div>
 <p>Note that a variable has to be specified to use the <code>times</code> query:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">variables</span>(fabric) &lt;-<span class="st"> </span><span class="ot">NA</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="kw">variables</span>(fabric) &lt;-<span class="st"> </span><span class="ot">NA</span></span></code></pre></div>
 <pre><code>## [1] &quot;ppt&quot; &quot;tmx&quot; &quot;tmn&quot;</code></pre>
 <p>This will fail:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">query</span>(fabric, <span class="st">'times'</span>)</code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="kw">query</span>(fabric, <span class="st">&#39;times&#39;</span>)</span></code></pre></div>
 <pre><code> Error in times_query(fabric, knife) : 
   variables cannot be NA for fabric argument </code></pre>
 <p>At present, the <code>geoknife</code> package does not have a query method for dataset urls.</p>
@@ -444,8 +666,8 @@ july.idx &lt;-<span class="st"> </span><span class="kw">months</span>(sst<span c
 <div id="query-function-for-webprocess" class="section level3">
 <h3>query function for <code>webprocess</code></h3>
 <p>The <code>query</code> function works on <code>webprocess</code>, similar to how it works for <code>webgeom</code> and <code>webdata</code> objects. For a default <code>webprocess</code> object, the available algorithms can be queried by:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knife &lt;-<span class="st"> </span><span class="kw">webprocess</span>()
-<span class="kw">query</span>(knife, <span class="st">'algorithms'</span>)</code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>knife &lt;-<span class="st"> </span><span class="kw">webprocess</span>()</span>
+<span id="cb65-2"><a href="#cb65-2"></a><span class="kw">query</span>(knife, <span class="st">&#39;algorithms&#39;</span>)</span></code></pre></div>
 <pre><code>## $`Categorical Coverage Fraction`
 ## [1] &quot;gov.usgs.cida.gdp.wps.algorithm.FeatureCategoricalGridCoverageAlgorithm&quot;
 ## 
@@ -461,8 +683,8 @@ july.idx &lt;-<span class="st"> </span><span class="kw">months</span>(sst<span c
 ## $`WCS Subset`
 ## [1] &quot;gov.usgs.cida.gdp.wps.algorithm.FeatureCoverageIntersectionAlgorithm&quot;</code></pre>
 <p>Changing the <code>webprocess</code> url will modify the endpoint for the query, and different algorithms may be available:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">url</span>(knife) &lt;-<span class="st"> 'https://cida-test.er.usgs.gov/gdp/process/WebProcessingService'</span>
-<span class="kw">query</span>(knife, <span class="st">'algorithms'</span>)</code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="kw">url</span>(knife) &lt;-<span class="st"> &#39;https://cida-test.er.usgs.gov/gdp/process/WebProcessingService&#39;</span></span>
+<span id="cb67-2"><a href="#cb67-2"></a><span class="kw">query</span>(knife, <span class="st">&#39;algorithms&#39;</span>)</span></code></pre></div>
 <pre><code>## $`Categorical Coverage Fraction`
 ## [1] &quot;gov.usgs.cida.gdp.wps.algorithm.FeatureCategoricalGridCoverageAlgorithm&quot;
 ## 
@@ -481,11 +703,11 @@ july.idx &lt;-<span class="st"> </span><span class="kw">months</span>(sst<span c
 <div id="algorithm" class="section level3">
 <h3>algorithm</h3>
 <p>As noted above, the <code>algorithm</code> field in <code>webprocess</code> is a list, specifying the algorithm name and relative path to the algorithm endpoint. To access or change the algorithm:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knife &lt;-<span class="st"> </span><span class="kw">webprocess</span>()
-<span class="kw">algorithm</span>(knife) &lt;-<span class="st"> </span><span class="kw">query</span>(knife, <span class="st">'algorithms'</span>)[<span class="dv">1</span>]
-<span class="co"># -- or --</span>
-<span class="kw">algorithm</span>(knife) &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">'Area Grid Statistics (weighted)'</span> =<span class="st"> </span>
-<span class="st">                           &quot;gov.usgs.cida.gdp.wps.algorithm.FeatureWeightedGridStatisticsAlgorithm&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a>knife &lt;-<span class="st"> </span><span class="kw">webprocess</span>()</span>
+<span id="cb69-2"><a href="#cb69-2"></a><span class="kw">algorithm</span>(knife) &lt;-<span class="st"> </span><span class="kw">query</span>(knife, <span class="st">&#39;algorithms&#39;</span>)[<span class="dv">1</span>]</span>
+<span id="cb69-3"><a href="#cb69-3"></a><span class="co"># -- or --</span></span>
+<span id="cb69-4"><a href="#cb69-4"></a><span class="kw">algorithm</span>(knife) &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&#39;Area Grid Statistics (weighted)&#39;</span> =<span class="st"> </span></span>
+<span id="cb69-5"><a href="#cb69-5"></a><span class="st">                           &quot;gov.usgs.cida.gdp.wps.algorithm.FeatureWeightedGridStatisticsAlgorithm&quot;</span>)</span></code></pre></div>
 </div>
 <div id="inputs" class="section level3">
 <h3>inputs</h3>
@@ -494,13 +716,13 @@ july.idx &lt;-<span class="st"> </span><span class="kw">months</span>(sst<span c
 <div id="url" class="section level3">
 <h3>url</h3>
 <p>The <code>url</code> field in <code>webprocess</code> can be accessed and set as expected:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">url</span>(knife) &lt;-<span class="st"> 'https://cida-test.er.usgs.gov/gdp/process/WebProcessingService'</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="kw">url</span>(knife) &lt;-<span class="st"> &#39;https://cida-test.er.usgs.gov/gdp/process/WebProcessingService&#39;</span></span></code></pre></div>
 </div>
 <div id="wait" class="section level3">
 <h3><code>wait</code></h3>
 <p>The <code>wait</code> boolean in <code>webprocess</code> can set during creation:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knife &lt;-<span class="st"> </span><span class="kw">webprocess</span>(<span class="dt">wait =</span> <span class="ot">TRUE</span>)
-knife</code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a>knife &lt;-<span class="st"> </span><span class="kw">webprocess</span>(<span class="dt">wait =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb71-2"><a href="#cb71-2"></a>knife</span></code></pre></div>
 <pre><code>## An object of class &quot;webprocess&quot;:
 ## url: https://cida.usgs.gov/gdp/process/WebProcessingService 
 ## algorithm: Area Grid Statistics (weighted) 
@@ -518,8 +740,8 @@ knife</code></pre></div>
 <div id="email" class="section level3">
 <h3><code>email</code></h3>
 <p>The <code>email</code> field in <code>webprocess</code> can be accessed and set as expected:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knife &lt;-<span class="st"> </span><span class="kw">webprocess</span>(<span class="dt">email =</span> <span class="st">'fake.email@gmail.com'</span>)
-knife</code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a>knife &lt;-<span class="st"> </span><span class="kw">webprocess</span>(<span class="dt">email =</span> <span class="st">&#39;fake.email@gmail.com&#39;</span>)</span>
+<span id="cb73-2"><a href="#cb73-2"></a>knife</span></code></pre></div>
 <pre><code>## An object of class &quot;webprocess&quot;:
 ## url: https://cida.usgs.gov/gdp/process/WebProcessingService 
 ## algorithm: Area Grid Statistics (weighted) 
@@ -550,8 +772,8 @@ knife</code></pre></div>
 <div id="check-and-related-functions" class="section level3">
 <h3><code>check</code> and related functions</h3>
 <p>The status of a <code>geojob</code> can be checked with the <code>check</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">job &lt;-<span class="st"> </span><span class="kw">geoknife</span>(stencil, <span class="dt">fabric =</span> <span class="st">'prism'</span>, <span class="dt">wait =</span> <span class="ot">FALSE</span>)
-<span class="kw">check</span>(job)</code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a>job &lt;-<span class="st"> </span><span class="kw">geoknife</span>(stencil, <span class="dt">fabric =</span> <span class="st">&#39;prism&#39;</span>, <span class="dt">wait =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb75-2"><a href="#cb75-2"></a><span class="kw">check</span>(job)</span></code></pre></div>
 <pre><code>## $status
 ## [1] &quot;Process Started&quot;
 ## 
@@ -561,32 +783,35 @@ knife</code></pre></div>
 ## $statusType
 ## [1] &quot;ProcessStarted&quot;</code></pre>
 <p>use other convienence functions related to <code>check</code> to return boolean (<code>TRUE</code> or <code>FALSE</code>) responses</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">running</span>(job)
-<span class="kw">error</span>(job)
-<span class="kw">successful</span>(job)</code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a><span class="kw">running</span>(job)</span>
+<span id="cb77-2"><a href="#cb77-2"></a><span class="kw">error</span>(job)</span>
+<span id="cb77-3"><a href="#cb77-3"></a><span class="kw">successful</span>(job)</span></code></pre></div>
 </div>
 <div id="cancel-geojob" class="section level3">
 <h3><code>cancel</code> geojob</h3>
 <p>The <code>geoknife</code> package currently limits the user processing requests to single-running processes, so as to avoid creating thousands of requests in error, which could overwhelm the processing resources. If there is a reason to support additional jobs at one time, please email the package maintainers with your query.</p>
 <p>To cancel and existing job: Cancel a running job but retain the details:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">id</span>(job)</code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a><span class="kw">id</span>(job)</span></code></pre></div>
 <pre><code>## [1] &quot;https://cida.usgs.gov:80/gdp/process/RetrieveResultServlet?id=a264a88c-9672-4029-915b-a09b1403d26a&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">job &lt;-<span class="st"> </span><span class="kw">cancel</span>(job)
-<span class="kw">id</span>(job)</code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a>job &lt;-<span class="st"> </span><span class="kw">cancel</span>(job)</span>
+<span id="cb80-2"><a href="#cb80-2"></a><span class="kw">id</span>(job)</span></code></pre></div>
 <pre><code>## [1] &quot;&lt;no active job&gt;&quot;</code></pre>
 <p>To cancel any running job without specifying the <code>geojob</code> reference:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cancel</span>()</code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a><span class="kw">cancel</span>()</span></code></pre></div>
 </div>
 </div>
 <div id="geoknife-web-resources" class="section level2">
 <h2>geoknife web resources</h2>
-<p>geoknife outsources all major geospatial processing tasks to a remote server. Because of this, users must have an active internet connection. Problems with connections to datasets or the processing resources are rare, but they do happen. When experiencing a connectivity problem, the best approach is often to try again later or email <a href="mailto:gdp@usgs.gov">gdp@usgs.gov</a> with any questions. The various web dependencies are described below.</p>
+<p>geoknife outsources all major geospatial processing tasks to a remote server. Because of this, users must have an active internet connection. Problems with connections to datasets or the processing resources are rare, but they do happen. When experiencing a connectivity problem, the best approach is often to try again later or email <a href="mailto:gdp@usgs.gov" class="email">gdp@usgs.gov</a> with any questions. The various web dependencies are described below.</p>
 <div id="geo-data-portal" class="section level3">
 <h3>Geo Data Portal</h3>
 <p>The U.S. Geological Survey’s “Geo Data Portal” (GDP) provides the data access and processing services that are leveraged by the <code>geoknife</code> package. See <a href="https://cida.usgs.gov/gdp">cida.usgs.gov/gdp</a> for the GDP user interface.</p>
 </div>
 </div>
 
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

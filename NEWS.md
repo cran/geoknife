@@ -1,4 +1,4 @@
-geoknife 1.6.3
+geoknife 1.6.4
 ==========
-* Fixed bugs in progress bar
-* Test and vignette changes for CRAN
+* Improved error handling for failed processing jobs
+* Fixed bug with supported CRS
