@@ -209,7 +209,7 @@ variables(fabric) <- NA
 #  query(knife, 'algorithms')
 
 ## ----eval=FALSE-------------------------------------------
-#  url(knife) <- 'https://cida-test.er.usgs.gov/gdp/process/WebProcessingService'
+#  url(knife) <- 'https://cida.usgs.gov/gdp/process/WebProcessingService'
 #  query(knife, 'algorithms')
 
 ## ---- eval=FALSE------------------------------------------
@@ -220,7 +220,7 @@ variables(fabric) <- NA
 #                             "gov.usgs.cida.gdp.wps.algorithm.FeatureWeightedGridStatisticsAlgorithm")
 
 ## ---- eval=FALSE------------------------------------------
-#  url(knife) <- 'https://cida-test.er.usgs.gov/gdp/process/WebProcessingService'
+#  url(knife) <- 'https://cida.usgs.gov/gdp/process/WebProcessingService'
 
 ## ---- eval=FALSE------------------------------------------
 #  knife <- webprocess(wait = TRUE)

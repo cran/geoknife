@@ -1,8 +1,8 @@
 Package: geoknife
 Type: Package
 Title: Web-Processing of Large Gridded Datasets
-Version: 1.6.4
-Date: 2020-05-20
+Version: 1.6.5
+Date: 2021-04-26
 Authors@R: c( person("Jordan", "Read", role = c("aut","cre"),
     email = "jread@usgs.gov"),
     person("Jordan", "Walker", role = c("aut"),
@@ -31,7 +31,7 @@ Copyright: This software is in the public domain because it contains
         materials that originally came from the United States
         Geological Survey, an agency of the United States Department of
         Interior.
-Depends: R (>= 3.0)
+Depends: R (>= 3.5.0)
 Imports: whisker, xml2, methods, httr (>= 1.0.0), curl, sp, utils,
         progress (>= 1.1.2)
 Suggests: testthat, xtable, knitr, rmarkdown, ggmap, dplyr, rasterVis,
@@ -39,7 +39,7 @@ Suggests: testthat, xtable, knitr, rmarkdown, ggmap, dplyr, rasterVis,
 VignetteBuilder: knitr
 RoxygenNote: 7.1.0
 NeedsCompilation: no
-Packaged: 2020-06-02 00:38:00 UTC; wwatkins
+Packaged: 2021-04-26 15:10:41 UTC; dblodgett
 Author: Jordan Read [aut, cre],
   Jordan Walker [aut],
   Alison Appling [aut],
@@ -50,4 +50,4 @@ Author: Jordan Read [aut, cre],
   David Watkins [aut]
 Maintainer: Jordan Read <jread@usgs.gov>
 Repository: CRAN
-Date/Publication: 2020-06-02 08:50:25 UTC
+Date/Publication: 2021-04-27 05:50:05 UTC

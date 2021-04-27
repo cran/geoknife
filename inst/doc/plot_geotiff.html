@@ -15,26 +15,31 @@
 
 <title>subset gridded data as geotiff and plot</title>
 
-<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
-// be compatible with the behavior of Pandoc < 2.8).
-document.addEventListener('DOMContentLoaded', function(e) {
-  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
-  var i, h, a;
-  for (i = 0; i < hs.length; i++) {
-    h = hs[i];
-    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
-    a = h.attributes;
-    while (a.length > 0) h.removeAttribute(a[0].name);
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
   }
-});
-</script>
-
-
-<style type="text/css">code{white-space: pre;}</style>
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -120,187 +125,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<style type="text/css">body {
-background-color: #fff;
-margin: 1em auto;
-max-width: 700px;
-overflow: visible;
-padding-left: 2em;
-padding-right: 2em;
-font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size: 14px;
-line-height: 1.35;
-}
-#TOC {
-clear: both;
-margin: 0 0 10px 10px;
-padding: 4px;
-width: 400px;
-border: 1px solid #CCCCCC;
-border-radius: 5px;
-background-color: #f6f6f6;
-font-size: 13px;
-line-height: 1.3;
-}
-#TOC .toctitle {
-font-weight: bold;
-font-size: 15px;
-margin-left: 5px;
-}
-#TOC ul {
-padding-left: 40px;
-margin-left: -1.5em;
-margin-top: 5px;
-margin-bottom: 5px;
-}
-#TOC ul ul {
-margin-left: -2em;
-}
-#TOC li {
-line-height: 16px;
-}
-table {
-margin: 1em auto;
-border-width: 1px;
-border-color: #DDDDDD;
-border-style: outset;
-border-collapse: collapse;
-}
-table th {
-border-width: 2px;
-padding: 5px;
-border-style: inset;
-}
-table td {
-border-width: 1px;
-border-style: inset;
-line-height: 18px;
-padding: 5px 5px;
-}
-table, table th, table td {
-border-left-style: none;
-border-right-style: none;
-}
-table thead, table tr.even {
-background-color: #f7f7f7;
-}
-p {
-margin: 0.5em 0;
-}
-blockquote {
-background-color: #f6f6f6;
-padding: 0.25em 0.75em;
-}
-hr {
-border-style: solid;
-border: none;
-border-top: 1px solid #777;
-margin: 28px 0;
-}
-dl {
-margin-left: 0;
-}
-dl dd {
-margin-bottom: 13px;
-margin-left: 13px;
-}
-dl dt {
-font-weight: bold;
-}
-ul {
-margin-top: 0;
-}
-ul li {
-list-style: circle outside;
-}
-ul ul {
-margin-bottom: 0;
-}
-pre, code {
-background-color: #f7f7f7;
-border-radius: 3px;
-color: #333;
-white-space: pre-wrap; 
-}
-pre {
-border-radius: 3px;
-margin: 5px 0px 10px 0px;
-padding: 10px;
-}
-pre:not([class]) {
-background-color: #f7f7f7;
-}
-code {
-font-family: Consolas, Monaco, 'Courier New', monospace;
-font-size: 85%;
-}
-p > code, li > code {
-padding: 2px 0px;
-}
-div.figure {
-text-align: center;
-}
-img {
-background-color: #FFFFFF;
-padding: 2px;
-border: 1px solid #DDDDDD;
-border-radius: 3px;
-border: 1px solid #CCCCCC;
-margin: 0 5px;
-}
-h1 {
-margin-top: 0;
-font-size: 35px;
-line-height: 40px;
-}
-h2 {
-border-bottom: 4px solid #f7f7f7;
-padding-top: 10px;
-padding-bottom: 2px;
-font-size: 145%;
-}
-h3 {
-border-bottom: 2px solid #f7f7f7;
-padding-top: 10px;
-font-size: 120%;
-}
-h4 {
-border-bottom: 1px solid #f7f7f7;
-margin-left: 8px;
-font-size: 105%;
-}
-h5, h6 {
-border-bottom: 1px solid #ccc;
-font-size: 105%;
-}
-a {
-color: #0033dd;
-text-decoration: none;
-}
-a:hover {
-color: #6666ff; }
-a:visited {
-color: #800080; }
-a:visited:hover {
-color: #BB00BB; }
-a[href^="http:"] {
-text-decoration: underline; }
-a[href^="https:"] {
-text-decoration: underline; }
 
-code > span.kw { color: #555; font-weight: bold; } 
-code > span.dt { color: #902000; } 
-code > span.dv { color: #40a070; } 
-code > span.bn { color: #d14; } 
-code > span.fl { color: #d14; } 
-code > span.ch { color: #d14; } 
-code > span.st { color: #d14; } 
-code > span.co { color: #888888; font-style: italic; } 
-code > span.ot { color: #007020; } 
-code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; } 
-code > span.er { color: #a61717; background-color: #e3d2d2; } 
-</style>
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
 
 
 
@@ -314,7 +140,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">subset gridded data as geotiff and plot</h1>
 <h4 class="author">Jordan Read, Alison Appling</h4>
-<h4 class="date">01 June, 2020</h4>
+<h4 class="date">26 April, 2021</h4>
 
 
 <div id="TOC">
@@ -329,43 +155,43 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h2>get the data</h2>
 <p>see the <code>geoknife</code> getting started vignette for more details, but for the purposes of this vignette, we need to get some data first and then plot it up.<br />
 First things first, load up the <code>geoknife</code> package</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(geoknife)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geoknife)</span></code></pre></div>
 <p>For this example, I am going to use a dataset that is hosted by NASA, and includes a number of radiation estimates for various components. There is a lot of global data here, but I am just going to pluck a subset in time (one timepoint for the month of July of one year) and a spatial subset. I am going to use the <code>OUTPUT_TYPE=&#39;geotiff&#39;</code> argument that was added in version 1.1.0 of <code>geoknife</code>. We are relying on a NASA dataset here, so apologies if they change the url in the future and this doesn’t work…</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>knife &lt;-<span class="st"> </span><span class="kw">webprocess</span>(<span class="dt">algorithm =</span> <span class="kw">list</span>(<span class="st">&#39;OPeNDAP Subset&#39;</span>=<span class="st">&quot;gov.usgs.cida.gdp.wps.algorithm.FeatureCoverageOPeNDAPIntersectionAlgorithm&quot;</span>))</span>
-<span id="cb2-2"><a href="#cb2-2"></a>fabric &lt;-<span class="st"> </span><span class="kw">webdata</span>(<span class="dt">url=</span><span class="st">&#39;dods://opendap.larc.nasa.gov/opendap/hyrax/SortByProduct/CERES/EBAF/Surface_Edition2.8/CERES_EBAF-Surface_Edition2.8_200003-201506.nc&#39;</span>, </span>
-<span id="cb2-3"><a href="#cb2-3"></a>                  <span class="dt">variable=</span><span class="st">&quot;sfc_sw_down_all_mon&quot;</span>, <span class="co">#Surface Shortwave Flux Down, Monthly Means, All-Sky conditions</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>                  <span class="dt">times=</span><span class="kw">c</span>(<span class="st">&#39;2014-07-15&#39;</span>,<span class="st">&#39;2014-07-15&#39;</span>))</span>
-<span id="cb2-5"><a href="#cb2-5"></a>stencil &lt;-<span class="st"> </span><span class="kw">simplegeom</span>(<span class="kw">data.frame</span>(<span class="st">&#39;point1&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">32</span>), <span class="st">&#39;point2&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">90</span>,<span class="op">-</span><span class="dv">78</span>))) <span class="co"># big &#39;ol chunk &#39;o data</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>job &lt;-<span class="st"> </span><span class="kw">geoknife</span>(stencil, fabric, knife, <span class="dt">wait =</span> <span class="ot">TRUE</span>, <span class="dt">OUTPUT_TYPE =</span> <span class="st">&quot;geotiff&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>knife <span class="ot">&lt;-</span> <span class="fu">webprocess</span>(<span class="at">algorithm =</span> <span class="fu">list</span>(<span class="st">&#39;OPeNDAP Subset&#39;</span><span class="ot">=</span><span class="st">&quot;gov.usgs.cida.gdp.wps.algorithm.FeatureCoverageOPeNDAPIntersectionAlgorithm&quot;</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>fabric <span class="ot">&lt;-</span> <span class="fu">webdata</span>(<span class="at">url=</span><span class="st">&#39;dods://opendap.larc.nasa.gov/opendap/hyrax/SortByProduct/CERES/EBAF/Surface_Edition2.8/CERES_EBAF-Surface_Edition2.8_200003-201506.nc&#39;</span>, </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">variable=</span><span class="st">&quot;sfc_sw_down_all_mon&quot;</span>, <span class="co">#Surface Shortwave Flux Down, Monthly Means, All-Sky conditions</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">times=</span><span class="fu">c</span>(<span class="st">&#39;2014-07-15&#39;</span>,<span class="st">&#39;2014-07-15&#39;</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>stencil <span class="ot">&lt;-</span> <span class="fu">simplegeom</span>(<span class="fu">data.frame</span>(<span class="st">&#39;point1&#39;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">32</span>), <span class="st">&#39;point2&#39;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">90</span>,<span class="sc">-</span><span class="dv">78</span>))) <span class="co"># big &#39;ol chunk &#39;o data</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>job <span class="ot">&lt;-</span> <span class="fu">geoknife</span>(stencil, fabric, knife, <span class="at">wait =</span> <span class="cn">TRUE</span>, <span class="at">OUTPUT_TYPE =</span> <span class="st">&quot;geotiff&quot;</span>)</span></code></pre></div>
 <p>now that the job is complete (because <code>wait=TRUE</code> was used), we can download the result and unzip it:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>file &lt;-<span class="st"> </span><span class="kw">download</span>(job, <span class="dt">destination =</span> <span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">&#39;nasa_data.zip&#39;</span>), <span class="dt">overwrite=</span><span class="ot">TRUE</span>)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">unzip</span>(file, <span class="dt">exdir=</span><span class="kw">file.path</span>(<span class="kw">tempdir</span>(),<span class="st">&#39;NASA&#39;</span>))</span>
-<span id="cb3-3"><a href="#cb3-3"></a>tiff.dir &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">tempdir</span>(),<span class="st">&#39;NASA&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>file <span class="ot">&lt;-</span> <span class="fu">download</span>(job, <span class="at">destination =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&#39;nasa_data.zip&#39;</span>), <span class="at">overwrite=</span><span class="cn">TRUE</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span>(file, <span class="at">exdir=</span><span class="fu">file.path</span>(<span class="fu">tempdir</span>(),<span class="st">&#39;NASA&#39;</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>tiff.dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(),<span class="st">&#39;NASA&#39;</span>)</span></code></pre></div>
 </div>
 <div id="plot-the-data" class="section level2">
 <h2>plot the data</h2>
 <p>using the <code>rasterVis</code> package, read this in and create a raster object:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">library</span>(rgdal)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">library</span>(rasterVis)</span>
-<span id="cb4-3"><a href="#cb4-3"></a>nasa &lt;-<span class="st"> </span><span class="kw">raster</span>(<span class="kw">file.path</span>(tiff.dir , <span class="kw">dir</span>(tiff.dir)))</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgdal)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rasterVis)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>nasa <span class="ot">&lt;-</span> <span class="fu">raster</span>(<span class="fu">file.path</span>(tiff.dir , <span class="fu">dir</span>(tiff.dir)))</span></code></pre></div>
 <p>Now, use <code>ggplot2</code> and <code>ggmap</code> to plot this as a map:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">library</span>(maps)</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">library</span>(ggmap)</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a></span>
-<span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a>world &lt;-<span class="st"> </span><span class="kw">map_data</span>(<span class="st">&quot;world2&quot;</span>)</span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="kw">gplot</span>(nasa, <span class="dt">maxpixels =</span> <span class="fl">5e5</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="st">  </span><span class="kw">geom_tile</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> value), <span class="dt">alpha=</span><span class="dv">1</span>) <span class="op">+</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">data=</span>world, <span class="kw">aes</span>(<span class="dt">x=</span>long, <span class="dt">y=</span>lat, <span class="dt">group=</span>group), <span class="dt">color=</span><span class="st">&quot;navy&quot;</span>, <span class="dt">fill=</span><span class="st">&#39;transparent&#39;</span>) <span class="op">+</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="st">  </span><span class="kw">scale_fill_gradientn</span>(<span class="st">&quot;Surface Shortwave Flux (W/m^2)&quot;</span>, <span class="dt">colours=</span><span class="kw">rev</span>(<span class="kw">rainbow</span>(<span class="dv">5</span>))) <span class="op">+</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="st">  </span><span class="kw">coord_equal</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="st">  </span><span class="kw">theme_classic</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.line =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.text.y =</span> <span class="kw">element_blank</span>(),</span>
-<span id="cb5-15"><a href="#cb5-15"></a>        <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.title.x =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.title.y =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(nasa<span class="op">@</span>extent<span class="op">@</span>ymin, nasa<span class="op">@</span>extent<span class="op">@</span>ymax)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(nasa<span class="op">@</span>extent<span class="op">@</span>xmin, nasa<span class="op">@</span>extent<span class="op">@</span>xmax))</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(maps)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggmap)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>world <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">&quot;world2&quot;</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(nasa, <span class="at">maxpixels =</span> <span class="fl">5e5</span>) <span class="sc">+</span> </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> value), <span class="at">alpha=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data=</span>world, <span class="fu">aes</span>(<span class="at">x=</span>long, <span class="at">y=</span>lat, <span class="at">group=</span>group), <span class="at">color=</span><span class="st">&quot;navy&quot;</span>, <span class="at">fill=</span><span class="st">&#39;transparent&#39;</span>) <span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradientn</span>(<span class="st">&quot;Surface Shortwave Flux (W/m^2)&quot;</span>, <span class="at">colours=</span><span class="fu">rev</span>(<span class="fu">rainbow</span>(<span class="dv">5</span>))) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span> </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.line =</span> <span class="fu">element_blank</span>(), <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(), <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(), <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>(), <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(nasa<span class="sc">@</span>extent<span class="sc">@</span>ymin, nasa<span class="sc">@</span>extent<span class="sc">@</span>ymax)) <span class="sc">+</span> </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(nasa<span class="sc">@</span>extent<span class="sc">@</span>xmin, nasa<span class="sc">@</span>extent<span class="sc">@</span>xmax))</span></code></pre></div>
 </div>
 
 
