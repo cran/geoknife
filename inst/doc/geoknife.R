@@ -11,7 +11,7 @@ id <- geoknife::id
 
 ## ---- eval=FALSE------------------------------------------
 #  install.packages("geoknife",
-#      repos = c("https://owi.usgs.gov/R","https://cran.rstudio.com/"),
+#      repos = c("https://cran.rstudio.com/"),
 #      dependencies = TRUE)
 
 ## ---- eval=FALSE------------------------------------------
@@ -209,7 +209,7 @@ variables(fabric) <- NA
 #  query(knife, 'algorithms')
 
 ## ----eval=FALSE-------------------------------------------
-#  url(knife) <- 'https://cida.usgs.gov/gdp/process/WebProcessingService'
+#  url(knife) <- 'https://labs.waterdata.usgs.gov/gdp-process-wps/WebProcessingService'
 #  query(knife, 'algorithms')
 
 ## ---- eval=FALSE------------------------------------------
@@ -220,7 +220,7 @@ variables(fabric) <- NA
 #                             "gov.usgs.cida.gdp.wps.algorithm.FeatureWeightedGridStatisticsAlgorithm")
 
 ## ---- eval=FALSE------------------------------------------
-#  url(knife) <- 'https://cida.usgs.gov/gdp/process/WebProcessingService'
+#  url(knife) <- 'https://labs.waterdata.usgs.gov/gdp-process-wps/WebProcessingService'
 
 ## ---- eval=FALSE------------------------------------------
 #  knife <- webprocess(wait = TRUE)

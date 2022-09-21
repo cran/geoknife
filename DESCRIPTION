@@ -1,7 +1,7 @@
 Package: geoknife
 Type: Package
 Title: Web-Processing of Large Gridded Datasets
-Version: 1.6.7
+Version: 1.6.8
 Authors@R: c( person("Jordan", "Read", role = c("aut"),
     email = "jread@usgs.gov"),
     person("Jordan", "Walker", role = c("aut"),
@@ -37,9 +37,9 @@ Suggests: testthat, xtable, knitr, rmarkdown, ggmap, dplyr, rasterVis,
         ggplot2, rgdal, sp, raster
 VignetteBuilder: knitr
 Encoding: UTF-8
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 NeedsCompilation: no
-Packaged: 2022-07-20 12:55:55 UTC; dblodgett
+Packaged: 2022-09-20 14:33:28 UTC; dblodgett
 Author: Jordan Read [aut],
   Jordan Walker [aut],
   Alison Appling [aut],
@@ -50,4 +50,4 @@ Author: Jordan Read [aut],
   David Watkins [aut]
 Maintainer: David Blodgett <dblodgett@usgs.gov>
 Repository: CRAN
-Date/Publication: 2022-07-20 14:20:06 UTC
+Date/Publication: 2022-09-21 22:50:02 UTC

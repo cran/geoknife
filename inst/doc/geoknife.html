@@ -121,13 +121,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -333,61 +340,66 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">geoknife package</h1>
 <h4 class="author">Jordan Read</h4>
-<h4 class="date">20 July, 2022</h4>
+<h4 class="date">20 September, 2022</h4>
 
 
 <div id="TOC">
 <ul>
-<li><a href="#getting-started">getting started</a>
+<li><a href="#getting-started" id="toc-getting-started">getting
+started</a>
 <ul>
-<li><a href="#geoknife-concepts">geoknife concepts</a></li>
-<li><a href="#remote-processing-basics">remote processing
-basics</a></li>
-<li><a href="#quick-start-guide">quick start guide</a></li>
+<li><a href="#geoknife-concepts" id="toc-geoknife-concepts">geoknife
+concepts</a></li>
+<li><a href="#remote-processing-basics" id="toc-remote-processing-basics">remote processing basics</a></li>
+<li><a href="#quick-start-guide" id="toc-quick-start-guide">quick start
+guide</a></li>
 </ul></li>
-<li><a href="#spatial-features-stencil">spatial features
+<li><a href="#spatial-features-stencil" id="toc-spatial-features-stencil">spatial features
 (<code>stencil</code>)</a>
 <ul>
-<li><a href="#simplegeom-object"><code>simplegeom</code> object</a></li>
-<li><a href="#webgeom-object"><code>webgeom</code> object</a></li>
-<li><a href="#quick-access-to-web-available-data-for-webgeoms">quick
-access to web available data for webgeoms</a></li>
-<li><a href="#query-function-for-webgeom">query function for
+<li><a href="#simplegeom-object" id="toc-simplegeom-object"><code>simplegeom</code> object</a></li>
+<li><a href="#webgeom-object" id="toc-webgeom-object"><code>webgeom</code> object</a></li>
+<li><a href="#quick-access-to-web-available-data-for-webgeoms" id="toc-quick-access-to-web-available-data-for-webgeoms">quick access to
+web available data for webgeoms</a></li>
+<li><a href="#query-function-for-webgeom" id="toc-query-function-for-webgeom">query function for
 <code>webgeom</code></a></li>
 </ul></li>
-<li><a href="#gridded-data-fabric">gridded data
-(<code>fabric</code>)</a>
+<li><a href="#gridded-data-fabric" id="toc-gridded-data-fabric">gridded
+data (<code>fabric</code>)</a>
 <ul>
-<li><a href="#webdata-object"><code>webdata</code> object</a></li>
-<li><a href="#find-data-that-is-indexed-by-the-geo-data-portal-catalog">find
+<li><a href="#webdata-object" id="toc-webdata-object"><code>webdata</code> object</a></li>
+<li><a href="#find-data-that-is-indexed-by-the-geo-data-portal-catalog" id="toc-find-data-that-is-indexed-by-the-geo-data-portal-catalog">find
 data that is indexed by the Geo Data Portal catalog</a></li>
-<li><a href="#find-data-that-is-not-indexed-by-the-geo-data-portal-catalog">find
+<li><a href="#find-data-that-is-not-indexed-by-the-geo-data-portal-catalog" id="toc-find-data-that-is-not-indexed-by-the-geo-data-portal-catalog">find
 data that is <em>not</em> indexed by the Geo Data Portal
 catalog</a></li>
-<li><a href="#query-function-for-webdata">query function for
+<li><a href="#query-function-for-webdata" id="toc-query-function-for-webdata">query function for
 <code>webdata</code></a></li>
 </ul></li>
-<li><a href="#knife-object"><code>knife</code> object</a>
+<li><a href="#knife-object" id="toc-knife-object"><code>knife</code>
+object</a>
 <ul>
-<li><a href="#query-function-for-webprocess">query function for
+<li><a href="#query-function-for-webprocess" id="toc-query-function-for-webprocess">query function for
 <code>webprocess</code></a></li>
-<li><a href="#algorithm">algorithm</a></li>
-<li><a href="#inputs">inputs</a></li>
-<li><a href="#url">url</a></li>
-<li><a href="#wait"><code>wait</code></a></li>
-<li><a href="#email"><code>email</code></a></li>
+<li><a href="#algorithm" id="toc-algorithm">algorithm</a></li>
+<li><a href="#inputs" id="toc-inputs">inputs</a></li>
+<li><a href="#url" id="toc-url">url</a></li>
+<li><a href="#wait" id="toc-wait"><code>wait</code></a></li>
+<li><a href="#email" id="toc-email"><code>email</code></a></li>
 </ul></li>
-<li><a href="#geojob-details"><code>geojob</code> details</a>
+<li><a href="#geojob-details" id="toc-geojob-details"><code>geojob</code> details</a>
 <ul>
-<li><a href="#geojob-class-and-details"><code>geojob</code> class and
+<li><a href="#geojob-class-and-details" id="toc-geojob-class-and-details"><code>geojob</code> class and
 details</a></li>
-<li><a href="#check-and-related-functions"><code>check</code> and
-related functions</a></li>
-<li><a href="#cancel-geojob"><code>cancel</code> geojob</a></li>
+<li><a href="#check-and-related-functions" id="toc-check-and-related-functions"><code>check</code> and related
+functions</a></li>
+<li><a href="#cancel-geojob" id="toc-cancel-geojob"><code>cancel</code>
+geojob</a></li>
 </ul></li>
-<li><a href="#geoknife-web-resources">geoknife web resources</a>
+<li><a href="#geoknife-web-resources" id="toc-geoknife-web-resources">geoknife web resources</a>
 <ul>
-<li><a href="#geo-data-portal">Geo Data Portal</a></li>
+<li><a href="#geo-data-portal" id="toc-geo-data-portal">Geo Data
+Portal</a></li>
 </ul></li>
 </ul>
 </div>
@@ -422,7 +434,7 @@ with <code>check</code>, and output can be loaded into a data.frame with
 <p>##Installation To install the stable version of
 <strong>geoknife</strong> package with dependencies:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;geoknife&quot;</span>, </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">repos =</span> <span class="fu">c</span>(<span class="st">&quot;https://owi.usgs.gov/R&quot;</span>,<span class="st">&quot;https://cran.rstudio.com/&quot;</span>),</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">repos =</span> <span class="fu">c</span>(<span class="st">&quot;https://cran.rstudio.com/&quot;</span>),</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Or to install the current development version of the package:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
@@ -545,11 +557,11 @@ display a few of them</p>
 <h4>define a fabric that represents the underlying data</h4>
 <p>The Geo Data Portal’s web data catalog is quite extensive, and
 includes many datasets that can all be processed with
-<code>geoknife</code>. Check it out at cida.usgs.gov/gdp. This is not a
-complete list of all relevant datasets that can be accessed and
-processed. The <code>geoknife</code> package has a number of quick
-access datasets build in (similar to quick start <code>webgeom</code>
-objects).</p>
+<code>geoknife</code>. Check it out at labs.waterdata.usgs.gov/gdp_web.
+This is not a complete list of all relevant datasets that can be
+accessed and processed. The <code>geoknife</code> package has a number
+of quick access datasets build in (similar to quick start
+<code>webgeom</code> objects).</p>
 <p>An example of a quick start dataset:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fabric <span class="ot">&lt;-</span> <span class="fu">webdata</span>(<span class="st">&#39;prism&#39;</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>fabric</span></code></pre></div>
@@ -614,17 +626,16 @@ example:</p>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">&#39;point2&#39;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">88.6</span>, <span class="fl">45.2</span>)))</span></code></pre></div>
 <p>Also, a <code>SpatialPolygons</code> object can be used as well
 (example from <code>sp</code> package):</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span></code></pre></div>
-<pre><code>## Warning: package &#39;sp&#39; was built under R version 4.2.1</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Sr1 <span class="ot">=</span> <span class="fu">Polygon</span>(<span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">2</span>),<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">2</span>)))</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>Sr2 <span class="ot">=</span> <span class="fu">Polygon</span>(<span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">5</span>),<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>)))</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>Sr3 <span class="ot">=</span> <span class="fu">Polygon</span>(<span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">4</span>),<span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">5</span>)))</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>Sr4 <span class="ot">=</span> <span class="fu">Polygon</span>(<span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">5</span>),<span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>)), <span class="at">hole =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>Srs1 <span class="ot">=</span> <span class="fu">Polygons</span>(<span class="fu">list</span>(Sr1), <span class="st">&quot;s1&quot;</span>)</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>Srs2 <span class="ot">=</span> <span class="fu">Polygons</span>(<span class="fu">list</span>(Sr2), <span class="st">&quot;s2&quot;</span>)</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>Srs3 <span class="ot">=</span> <span class="fu">Polygons</span>(<span class="fu">list</span>(Sr3, Sr4), <span class="st">&quot;s3/4&quot;</span>)</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>stencil <span class="ot">&lt;-</span> <span class="fu">simplegeom</span>(<span class="at">Srl =</span> <span class="fu">list</span>(Srs1,Srs2,Srs3), <span class="at">proj4string =</span> <span class="fu">CRS</span>(<span class="st">&quot;+proj=longlat +datum=WGS84&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>Sr1 <span class="ot">=</span> <span class="fu">Polygon</span>(<span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">2</span>),<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">2</span>)))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>Sr2 <span class="ot">=</span> <span class="fu">Polygon</span>(<span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">5</span>),<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>)))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>Sr3 <span class="ot">=</span> <span class="fu">Polygon</span>(<span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">4</span>),<span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">5</span>)))</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>Sr4 <span class="ot">=</span> <span class="fu">Polygon</span>(<span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">5</span>),<span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>)), <span class="at">hole =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>Srs1 <span class="ot">=</span> <span class="fu">Polygons</span>(<span class="fu">list</span>(Sr1), <span class="st">&quot;s1&quot;</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>Srs2 <span class="ot">=</span> <span class="fu">Polygons</span>(<span class="fu">list</span>(Sr2), <span class="st">&quot;s2&quot;</span>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>Srs3 <span class="ot">=</span> <span class="fu">Polygons</span>(<span class="fu">list</span>(Sr3, Sr4), <span class="st">&quot;s3/4&quot;</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>stencil <span class="ot">&lt;-</span> <span class="fu">simplegeom</span>(<span class="at">Srl =</span> <span class="fu">list</span>(Srs1,Srs2,Srs3), <span class="at">proj4string =</span> <span class="fu">CRS</span>(<span class="st">&quot;+proj=longlat +datum=WGS84&quot;</span>))</span></code></pre></div>
 <pre><code>## Warning in value[[3L]](cond): SpatialPolygons support is
 ## deprecated.</code></pre>
 </div>
@@ -647,20 +658,20 @@ be use</li>
 <li><code>version</code>: the WFS version to use.</li>
 </ul>
 <p>To create a default <code>webgeom</code> object:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>stencil <span class="ot">&lt;-</span> <span class="fu">webgeom</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>stencil <span class="ot">&lt;-</span> <span class="fu">webgeom</span>()</span></code></pre></div>
 <p>The user-level information in webgeom is all available with the
 webgeom “show” method (or print).</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>stencil</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>stencil</span></code></pre></div>
 <pre><code>## An object of class &quot;webgeom&quot;:
-## url: https://cida.usgs.gov/gdp/geoserver/wfs 
+## url: https://labs.waterdata.usgs.gov/gdp_web/geoserver/wfs 
 ## geom: NA 
 ## attribute: NA 
 ## values: NA 
 ## wfs version: 1.1.0</code></pre>
 <p>The public fields can be accessed in by using the field name:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">geom</span>(stencil) <span class="ot">&lt;-</span> <span class="st">&quot;sample:CONUS_states&quot;</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attribute</span>(stencil) <span class="ot">&lt;-</span> <span class="st">&quot;STATE&quot;</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">values</span>(stencil) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Wisconsin&quot;</span>,<span class="st">&quot;Maine&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">geom</span>(stencil) <span class="ot">&lt;-</span> <span class="st">&quot;sample:CONUS_states&quot;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attribute</span>(stencil) <span class="ot">&lt;-</span> <span class="st">&quot;STATE&quot;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">values</span>(stencil) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Wisconsin&quot;</span>,<span class="st">&quot;Maine&quot;</span>)</span></code></pre></div>
 </div>
 <div id="quick-access-to-web-available-data-for-webgeoms" class="section level3">
 <h3>quick access to web available data for webgeoms</h3>
@@ -668,17 +679,17 @@ webgeom “show” method (or print).</p>
 used to figure out the pattern, or to use these datasets for analysis.
 Currently, the package only supports US States, Level III Ecoregions, or
 HUC8s:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>stencil <span class="ot">&lt;-</span> <span class="fu">webgeom</span>(<span class="st">&#39;state::Wisconsin&#39;</span>)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">webgeom</span>(<span class="st">&#39;state::Wisconsin,Maine&#39;</span>)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">webgeom</span>(<span class="st">&#39;HUC8::09020306,14060009&#39;</span>)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">webgeom</span>(<span class="st">&#39;ecoregion::Colorado Plateaus,Driftless Area&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>stencil <span class="ot">&lt;-</span> <span class="fu">webgeom</span>(<span class="st">&#39;state::Wisconsin&#39;</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">webgeom</span>(<span class="st">&#39;state::Wisconsin,Maine&#39;</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">webgeom</span>(<span class="st">&#39;HUC8::09020306,14060009&#39;</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">webgeom</span>(<span class="st">&#39;ecoregion::Colorado Plateaus,Driftless Area&#39;</span>)</span></code></pre></div>
 </div>
 <div id="query-function-for-webgeom" class="section level3">
 <h3>query function for <code>webgeom</code></h3>
 <p>The <code>query</code> function on <code>webgeom</code> can be used
 to find possible inputs for each public field (other than
 <code>version</code> and <code>url</code> currently):</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(stencil, <span class="st">&#39;geoms&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(stencil, <span class="st">&#39;geoms&#39;</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;sample:Alaska&quot;                  
 ##  [2] &quot;upload:CIDA_TEST_&quot;              
 ##  [3] &quot;sample:CONUS_Climate_Divisions&quot; 
@@ -695,7 +706,7 @@ to find possible inputs for each public field (other than
 ## [15] &quot;upload:nrhu_selection_Gallatin&quot; 
 ## [16] &quot;sample:simplified_HUC8s&quot;        
 ## [17] &quot;draw:test&quot;</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(stencil, <span class="st">&#39;attributes&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(stencil, <span class="st">&#39;attributes&#39;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;STATE&quot;</code></pre>
 </div>
 </div>
@@ -731,34 +742,34 @@ dataset to use. Must be valid variables that exist within the dataset
 specified with <code>url</code>.</li>
 </ul>
 <p>To create a default <code>webdata</code> object:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>fabric <span class="ot">&lt;-</span> <span class="fu">webdata</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>fabric <span class="ot">&lt;-</span> <span class="fu">webdata</span>()</span></code></pre></div>
 <p>The user-level information in webdata is all available with the
 webdata “show” method (or print).</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>fabric</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>fabric</span></code></pre></div>
 <pre><code>## An object of class &quot;webdata&quot;:
 ## times: NA, NA
 ## url: NA 
 ## variables: NA</code></pre>
 <p>The public fields can be accessed in by using the field name:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">times</span>(fabric)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">times</span>(fabric)</span></code></pre></div>
 <pre><code>## [1] NA NA</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">url</span>(fabric) <span class="ot">&lt;-</span> <span class="st">&#39;https://cida.usgs.gov/thredds/dodsC/prism&#39;</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">variables</span>(fabric) <span class="ot">&lt;-</span> <span class="st">&#39;tmx&#39;</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">times</span>(fabric)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(<span class="st">&#39;1990-01-01&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">url</span>(fabric) <span class="ot">&lt;-</span> <span class="st">&#39;https://cida.usgs.gov/thredds/dodsC/prism&#39;</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">variables</span>(fabric) <span class="ot">&lt;-</span> <span class="st">&#39;tmx&#39;</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">times</span>(fabric)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(<span class="st">&#39;1990-01-01&#39;</span>)</span></code></pre></div>
 </div>
 <div id="find-data-that-is-indexed-by-the-geo-data-portal-catalog" class="section level3">
 <h3>find data that is indexed by the Geo Data Portal catalog</h3>
 <p>The <code>fabric</code> is specified using the <code>webdata</code>
 function. <code>geoknife</code> can access a catalog of webdata by using
 the <code>query</code> function:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>webdatasets <span class="ot">=</span> <span class="fu">query</span>(<span class="st">&#39;webdata&#39;</span>)</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(webdatasets)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>webdatasets <span class="ot">=</span> <span class="fu">query</span>(<span class="st">&#39;webdata&#39;</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(webdatasets)</span></code></pre></div>
 <pre><code>## [1] 190</code></pre>
 <p>Interrogating datasets can be done by printing the returned dataset
 list, which displays the title and the url of each dataset by default
 (this example truncates the 190 datasets to display 5):</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>webdatasets[<span class="dv">61</span><span class="sc">:</span><span class="dv">65</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>webdatasets[<span class="dv">61</span><span class="sc">:</span><span class="dv">65</span>]</span></code></pre></div>
 <pre><code>## An object of class &quot;datagroup&quot;:
 ## [1] Eighth degree-CONUS Daily Downscaled Climate Projections Minimum and Maximum Temperature 
 ##   url: http://cida.usgs.gov/thredds/dodsC/dcp/conus_t 
@@ -773,20 +784,20 @@ list, which displays the title and the url of each dataset by default
 <p>Finding additional information about a particular dataset is
 supported by <code>title()</code> and <code>abstract()</code>, which
 return the dataset titles and abstracts respectively:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(webdatasets[<span class="dv">87</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(webdatasets[<span class="dv">87</span>])</span></code></pre></div>
 <pre><code>## [1] &quot;North Central River Forecasting Center - Quantitative Precipitation Estimate Archive&quot;</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abstract</span>(webdatasets[<span class="dv">87</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abstract</span>(webdatasets[<span class="dv">87</span>])</span></code></pre></div>
 <pre><code>## [1] &quot;Radar indicated-rain gage verified and corrected hourly precipitation estimate on a corrected ~4km HRAP grid.&quot;</code></pre>
 <p>indexing datasets based on order or title are equivalent</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>fabric <span class="ot">&lt;-</span> <span class="fu">webdata</span>(webdatasets[<span class="dv">99</span>])</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>evapotran <span class="ot">&lt;-</span> <span class="fu">webdata</span>(webdatasets[<span class="st">&#39;Monthly Conterminous U.S. actual evapotranspiration data&#39;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>fabric <span class="ot">&lt;-</span> <span class="fu">webdata</span>(webdatasets[<span class="dv">99</span>])</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>evapotran <span class="ot">&lt;-</span> <span class="fu">webdata</span>(webdatasets[<span class="st">&#39;Monthly Conterminous U.S. actual evapotranspiration data&#39;</span>])</span></code></pre></div>
 <p>To modify the times in <code>fabric</code>, use
 <code>times()</code>:</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">times</span>(fabric) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;1990-01-01&#39;</span>,<span class="st">&#39;2005-01-01&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">times</span>(fabric) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;1990-01-01&#39;</span>,<span class="st">&#39;2005-01-01&#39;</span>)</span></code></pre></div>
 <p>Similar to <code>webgeom</code>, the query method can be used on
 <code>webdata</code> objects:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(fabric, <span class="st">&#39;times&#39;</span>)</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(fabric, <span class="st">&#39;variables&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(fabric, <span class="st">&#39;times&#39;</span>)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(fabric, <span class="st">&#39;variables&#39;</span>)</span></code></pre></div>
 </div>
 <div id="find-data-that-is-not-indexed-by-the-geo-data-portal-catalog" class="section level3">
 <h3>find data that is <em>not</em> indexed by the Geo Data Portal
@@ -801,22 +812,22 @@ temperature sensing system. Specifying datasets such as this requires
 finding out the OPeNDAP endpoint (URL) for the dataset, and specifying
 it as the <code>url</code> to webdata (we found this example in the
 extensive apdrc.soest.hawaii.edu/data/data.php catalog):</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>fabric <span class="ot">=</span> <span class="fu">webdata</span>(<span class="at">url=</span><span class="st">&#39;dods://apdrc.soest.hawaii.edu/dods/public_data/satellite_product/AVHRR/avhrr_mon&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>fabric <span class="ot">=</span> <span class="fu">webdata</span>(<span class="at">url=</span><span class="st">&#39;dods://apdrc.soest.hawaii.edu/dods/public_data/satellite_product/AVHRR/avhrr_mon&#39;</span>)</span></code></pre></div>
 <p><code>query</code> for <code>variables</code> doesn’t work for this
 dataset, because it actually doesn’t have units and therefore “valid”
 variables are not returned (instead you get an empty list). From the
 OPeNDAP endpoint, it is clear that this dataset has one variable of
 interest, which is called ‘sst’:</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">variables</span>(fabric) <span class="ot">&lt;-</span> <span class="st">&#39;sst&#39;</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(fabric, <span class="st">&#39;times&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">variables</span>(fabric) <span class="ot">&lt;-</span> <span class="st">&#39;sst&#39;</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(fabric, <span class="st">&#39;times&#39;</span>)</span></code></pre></div>
 <pre><code>[1] &quot;1985-01-01 UTC&quot; &quot;2003-05-01 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">times</span>(fabric) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;1990-01-01&#39;</span>,<span class="st">&#39;1999-12-31&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">times</span>(fabric) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;1990-01-01&#39;</span>,<span class="st">&#39;1999-12-31&#39;</span>)</span></code></pre></div>
 <p>plotting the July surface temperature of a spot on the Caspian Sea is
 done by:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>sst <span class="ot">=</span> <span class="fu">result</span>(<span class="fu">geoknife</span>(<span class="fu">data.frame</span>(<span class="st">&#39;caspian.sea&#39;</span><span class="ot">=</span><span class="fu">c</span>(<span class="dv">51</span>,<span class="dv">40</span>)), fabric, <span class="at">wait =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sst)</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>july.idx <span class="ot">&lt;-</span> <span class="fu">months</span>(sst<span class="sc">$</span>DateTime) <span class="sc">==</span> <span class="st">&#39;July&#39;</span></span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sst<span class="sc">$</span>DateTime[july.idx], sst<span class="sc">$</span>caspian.sea[july.idx], <span class="at">type=</span><span class="st">&#39;l&#39;</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&#39;dodgerblue&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Sea Surface Temperature (degC)&#39;</span>,<span class="at">xlab=</span><span class="cn">NA</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>sst <span class="ot">=</span> <span class="fu">result</span>(<span class="fu">geoknife</span>(<span class="fu">data.frame</span>(<span class="st">&#39;caspian.sea&#39;</span><span class="ot">=</span><span class="fu">c</span>(<span class="dv">51</span>,<span class="dv">40</span>)), fabric, <span class="at">wait =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sst)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>july.idx <span class="ot">&lt;-</span> <span class="fu">months</span>(sst<span class="sc">$</span>DateTime) <span class="sc">==</span> <span class="st">&#39;July&#39;</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sst<span class="sc">$</span>DateTime[july.idx], sst<span class="sc">$</span>caspian.sea[july.idx], <span class="at">type=</span><span class="st">&#39;l&#39;</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">&#39;dodgerblue&#39;</span>, <span class="at">ylab=</span><span class="st">&#39;Sea Surface Temperature (degC)&#39;</span>,<span class="at">xlab=</span><span class="cn">NA</span>)</span></code></pre></div>
 <pre><code>##     DateTime caspian.sea variable statistic
 ## 1 1990-01-01      11.250      sst      MEAN
 ## 2 1990-02-01      10.575      sst      MEAN
@@ -832,18 +843,18 @@ done by:</p>
 similar to how it works for <code>webgeom</code> objects. For the PRISM
 dataset specified above, the time range of the dataset can come from
 <code>query</code> with <code>times</code>:</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>fabric <span class="ot">=</span> <span class="fu">webdata</span>(<span class="st">&#39;prism&#39;</span>)</span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">variables</span>(fabric) <span class="ot">&lt;-</span> <span class="st">&#39;ppt&#39;</span></span>
-<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(fabric, <span class="st">&#39;times&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>fabric <span class="ot">=</span> <span class="fu">webdata</span>(<span class="st">&#39;prism&#39;</span>)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">variables</span>(fabric) <span class="ot">&lt;-</span> <span class="st">&#39;ppt&#39;</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(fabric, <span class="st">&#39;times&#39;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;1895-01-01 UTC&quot; &quot;2013-02-01 UTC&quot;</code></pre>
 <p>likewise, variables with <code>variables</code>:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(fabric, <span class="st">&#39;variables&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(fabric, <span class="st">&#39;variables&#39;</span>)</span></code></pre></div>
 <p>Note that a variable has to be specified to use the
 <code>times</code> query:</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">variables</span>(fabric) <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">variables</span>(fabric) <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
 <pre><code>## [1] &quot;ppt&quot; &quot;tmx&quot; &quot;tmn&quot;</code></pre>
 <p>This will fail:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(fabric, <span class="st">&#39;times&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(fabric, <span class="st">&#39;times&#39;</span>)</span></code></pre></div>
 <pre><code> Error in times_query(fabric, knife) : 
   variables cannot be NA for fabric argument </code></pre>
 <p>At present, the <code>geoknife</code> package does not have a query
@@ -877,8 +888,8 @@ send the finished process result to.</li>
 similar to how it works for <code>webgeom</code> and
 <code>webdata</code> objects. For a default <code>webprocess</code>
 object, the available algorithms can be queried by:</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>knife <span class="ot">&lt;-</span> <span class="fu">webprocess</span>()</span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(knife, <span class="st">&#39;algorithms&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>knife <span class="ot">&lt;-</span> <span class="fu">webprocess</span>()</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(knife, <span class="st">&#39;algorithms&#39;</span>)</span></code></pre></div>
 <pre><code>## $`Categorical Coverage Fraction`
 ## [1] &quot;gov.usgs.cida.gdp.wps.algorithm.FeatureCategoricalGridCoverageAlgorithm&quot;
 ## 
@@ -892,8 +903,8 @@ object, the available algorithms can be queried by:</p>
 ## [1] &quot;gov.usgs.cida.gdp.wps.algorithm.FeatureWeightedGridStatisticsAlgorithm&quot;</code></pre>
 <p>Changing the <code>webprocess</code> url will modify the endpoint for
 the query, and different algorithms may be available:</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">url</span>(knife) <span class="ot">&lt;-</span> <span class="st">&#39;https://cida.usgs.gov/gdp/process/WebProcessingService&#39;</span></span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(knife, <span class="st">&#39;algorithms&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">url</span>(knife) <span class="ot">&lt;-</span> <span class="st">&#39;https://labs.waterdata.usgs.gov/gdp-process-wps/WebProcessingService&#39;</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(knife, <span class="st">&#39;algorithms&#39;</span>)</span></code></pre></div>
 <pre><code>## $`Categorical Coverage Fraction`
 ## [1] &quot;gov.usgs.cida.gdp.wps.algorithm.FeatureCategoricalGridCoverageAlgorithm&quot;
 ## 
@@ -912,11 +923,11 @@ the query, and different algorithms may be available:</p>
 <code>webprocess</code> is a list, specifying the algorithm name and
 relative path to the algorithm endpoint. To access or change the
 algorithm:</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>knife <span class="ot">&lt;-</span> <span class="fu">webprocess</span>()</span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">algorithm</span>(knife) <span class="ot">&lt;-</span> <span class="fu">query</span>(knife, <span class="st">&#39;algorithms&#39;</span>)[<span class="dv">1</span>]</span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="co"># -- or --</span></span>
-<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a><span class="fu">algorithm</span>(knife) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&#39;Area Grid Statistics (weighted)&#39;</span> <span class="ot">=</span> </span>
-<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;gov.usgs.cida.gdp.wps.algorithm.FeatureWeightedGridStatisticsAlgorithm&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>knife <span class="ot">&lt;-</span> <span class="fu">webprocess</span>()</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">algorithm</span>(knife) <span class="ot">&lt;-</span> <span class="fu">query</span>(knife, <span class="st">&#39;algorithms&#39;</span>)[<span class="dv">1</span>]</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="co"># -- or --</span></span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="fu">algorithm</span>(knife) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&#39;Area Grid Statistics (weighted)&#39;</span> <span class="ot">=</span> </span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;gov.usgs.cida.gdp.wps.algorithm.FeatureWeightedGridStatisticsAlgorithm&quot;</span>)</span></code></pre></div>
 </div>
 <div id="inputs" class="section level3">
 <h3>inputs</h3>
@@ -927,16 +938,16 @@ algorithm:</p>
 <h3>url</h3>
 <p>The <code>url</code> field in <code>webprocess</code> can be accessed
 and set as expected:</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">url</span>(knife) <span class="ot">&lt;-</span> <span class="st">&#39;https://cida.usgs.gov/gdp/process/WebProcessingService&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">url</span>(knife) <span class="ot">&lt;-</span> <span class="st">&#39;https://labs.waterdata.usgs.gov/gdp-process-wps/WebProcessingService&#39;</span></span></code></pre></div>
 </div>
 <div id="wait" class="section level3">
 <h3><code>wait</code></h3>
 <p>The <code>wait</code> boolean in <code>webprocess</code> can set
 during creation:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>knife <span class="ot">&lt;-</span> <span class="fu">webprocess</span>(<span class="at">wait =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>knife</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>knife <span class="ot">&lt;-</span> <span class="fu">webprocess</span>(<span class="at">wait =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>knife</span></code></pre></div>
 <pre><code>## An object of class &quot;webprocess&quot;:
-## url: https://cida.usgs.gov/gdp/process/WebProcessingService 
+## url: https://labs.waterdata.usgs.gov/gdp-process-wps/WebProcessingService 
 ## algorithm: Area Grid Statistics (weighted) 
 ## web processing service version: 1.0.0 
 ## process inputs: 
@@ -953,10 +964,10 @@ during creation:</p>
 <h3><code>email</code></h3>
 <p>The <code>email</code> field in <code>webprocess</code> can be
 accessed and set as expected:</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>knife <span class="ot">&lt;-</span> <span class="fu">webprocess</span>(<span class="at">email =</span> <span class="st">&#39;fake.email@gmail.com&#39;</span>)</span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>knife</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>knife <span class="ot">&lt;-</span> <span class="fu">webprocess</span>(<span class="at">email =</span> <span class="st">&#39;fake.email@gmail.com&#39;</span>)</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>knife</span></code></pre></div>
 <pre><code>## An object of class &quot;webprocess&quot;:
-## url: https://cida.usgs.gov/gdp/process/WebProcessingService 
+## url: https://labs.waterdata.usgs.gov/gdp-process-wps/WebProcessingService 
 ## algorithm: Area Grid Statistics (weighted) 
 ## web processing service version: 1.0.0 
 ## process inputs: 
@@ -998,8 +1009,8 @@ or <no active job> for no job.</li>
 <h3><code>check</code> and related functions</h3>
 <p>The status of a <code>geojob</code> can be checked with the
 <code>check</code> function:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>job <span class="ot">&lt;-</span> <span class="fu">geoknife</span>(stencil, <span class="at">fabric =</span> <span class="st">&#39;prism&#39;</span>, <span class="at">wait =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="fu">check</span>(job)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>job <span class="ot">&lt;-</span> <span class="fu">geoknife</span>(stencil, <span class="at">fabric =</span> <span class="st">&#39;prism&#39;</span>, <span class="at">wait =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">check</span>(job)</span></code></pre></div>
 <pre><code>## $status
 ## [1] &quot;Process Started&quot;
 ## 
@@ -1010,9 +1021,9 @@ or <no active job> for no job.</li>
 ## [1] &quot;ProcessStarted&quot;</code></pre>
 <p>use other convenience functions related to <code>check</code> to
 return boolean (<code>TRUE</code> or <code>FALSE</code>) responses</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">running</span>(job)</span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="fu">error</span>(job)</span>
-<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="fu">successful</span>(job)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">running</span>(job)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="fu">error</span>(job)</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="fu">successful</span>(job)</span></code></pre></div>
 </div>
 <div id="cancel-geojob" class="section level3">
 <h3><code>cancel</code> geojob</h3>
@@ -1023,14 +1034,14 @@ resources. If there is a reason to support additional jobs at one time,
 please email the package maintainers with your query.</p>
 <p>To cancel and existing job: Cancel a running job but retain the
 details:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span>(job)</span></code></pre></div>
-<pre><code>## [1] &quot;https://cida.usgs.gov:80/gdp/process/RetrieveResultServlet?id=a264a88c-9672-4029-915b-a09b1403d26a&quot;</code></pre>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>job <span class="ot">&lt;-</span> <span class="fu">cancel</span>(job)</span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span>(job)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span>(job)</span></code></pre></div>
+<pre><code>## [1] &quot;https://https://labs.waterdata.usgs.gov/gdp-process-wps/RetrieveResultServlet?id=a264a88c-9672-4029-915b-a09b1403d26a&quot;</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>job <span class="ot">&lt;-</span> <span class="fu">cancel</span>(job)</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span>(job)</span></code></pre></div>
 <pre><code>## [1] &quot;&lt;no active job&gt;&quot;</code></pre>
 <p>To cancel any running job without specifying the <code>geojob</code>
 reference:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cancel</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cancel</span>()</span></code></pre></div>
 </div>
 </div>
 <div id="geoknife-web-resources" class="section level2">
@@ -1045,8 +1056,8 @@ questions. The various web dependencies are described below.</p>
 <h3>Geo Data Portal</h3>
 <p>The U.S. Geological Survey’s “Geo Data Portal” (GDP) provides the
 data access and processing services that are leveraged by the
-<code>geoknife</code> package. See <a href="https://cida.usgs.gov/gdp/">cida.usgs.gov/gdp</a> for the GDP user
-interface.</p>
+<code>geoknife</code> package. See <a href="https://labs.waterdata.usgs.gov/gdp_web">labs.waterdata.usgs.gov/gdp_web</a>
+for the GDP user interface.</p>
 </div>
 </div>
 
