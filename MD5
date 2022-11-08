@@ -1,6 +1,6 @@
-88546e99b15b2f06a1ece5dd7de7c6d0 *DESCRIPTION
+028ff94ded267fad16c5524b484afbab *DESCRIPTION
 a3e4a35934c8babe4c53325f1eed5e4c *NAMESPACE
-de0aa0bbba28774a5e7b1a15fb2778cb *NEWS.md
+a1b8fcbc2acba185f2eb4793669c0883 *NEWS.md
 b2c3a689aca187461d7dbe9cfaac9102 *R/00-gconfig.R
 4aa2894329dc8257e47c9f34ca997a6d *R/01-geojob-obj.R
 ac3781a43e97c79dafb2e881b30d503d *R/02-webgeom-obj.R
@@ -16,7 +16,7 @@ c8ac141e03352e3cc93242777f02d466 *R/08-geoknife-function.R
 ede256a64e72e733d8635f8538078cee *R/download-geojob.R
 e866e355b389d1e0bb1a47e62e6dac5d *R/email-geojob.R
 2544c1a6bb2f36d65505caf0a5c961ef *R/geom-webgeom.R
-726a8b3416a5f961ea29260d8ec96927 *R/inputs-webprocess.R
+2b5748b5bdeaa0206a1dbeae284ed17e *R/inputs-webprocess.R
 b0339962975505a3db9ffc5fea053069 *R/processInputsToXML.R
 d3642e1c4762eef1aa8bd2b1ca2671ea *R/query-webdata-times.R
 d37673b6343224dd97f2a33502c2e16c *R/query-webdata-variables.R
@@ -43,16 +43,16 @@ a75d6e7a44705c59c9571923f6906448 *R/wait-geojob.R
 c9c866b3af266362065f036c686a176a *demo/iclus_categorical.R
 44b24a0811cad3a99003d53fcd0084a4 *demo/prism_subset.R
 e46bc5bec16945a6dd8d42f77141b885 *demo/prism_summary.R
-910546cbaa925b4c09c731589a084364 *inst/CITATION
+414f3676e0ff8bca48999db564b16f23 *inst/CITATION
 00e88c10831f17baffb85f8ef7ab075b *inst/doc/custom_data_sources.R
-30a53384de98ee071e03238249c2ec37 *inst/doc/custom_data_sources.Rmd
-fe901ec615f5129398edff223d98eb33 *inst/doc/custom_data_sources.html
+56b9a0f88a0af5591c6a54cc5bf309ed *inst/doc/custom_data_sources.Rmd
+11afa14b100eff0f4ad0145a41c84494 *inst/doc/custom_data_sources.html
 f74287d3acbcc3fbfa9d6a0e651b33fb *inst/doc/geoknife.R
 4828206ed2c4e4e1be395f80913e3691 *inst/doc/geoknife.Rmd
-c3ab361dfde8990db5cefcb95969c68d *inst/doc/geoknife.html
+0867de1be00dd1d7bce9554646ee8d80 *inst/doc/geoknife.html
 058849ff8bd3c1eb0663cd04815fdd2c *inst/doc/plot_geotiff.R
 632a07daf857f5c38ca662063c38291e *inst/doc/plot_geotiff.Rmd
-be5281399822788dfc639d1da3728393 *inst/doc/plot_geotiff.html
+66734d6b3160f7ad343f444b01ea7990 *inst/doc/plot_geotiff.html
 06b23427b83b7d49119b4e1699e6d22d *inst/extdata/HUC8_query.RData
 f86ba67bcbf24ca619a2160d73dbbf96 *inst/extdata/HUC8_stencil.RData
 2feeb1aff9384ebc6e24525072cf6b66 *inst/extdata/SB_getCapabilities.xml
@@ -77,7 +77,7 @@ b2f41dff32af6c1b28a6471ff3c7bc91 *inst/extdata/tsv_multi_feature.tsv
 23d62e03b0553935917ad311619cb32b *inst/templates/execute_template.xml
 41cf483d22dbd04cf4cb6f4d10959919 *inst/templates/getfeature_template.xml
 f51b7a076ff0c788ed4fac3e66bd6fcc *inst/templates/utility_execute_template.xml
-8a5daa1420316659d3e98b6c93c634ae *inst/unnamed-chunk-6-1.png
+e869cf79c6405e7fa92cede0dcf96d37 *inst/unnamed-chunk-6-1.png
 8a5daa1420316659d3e98b6c93c634ae *inst/unnamed-chunk-7-1.png
 99e883d047dca8d2cc95e68070ca03a8 *man/XML-method.Rd
 7b37baa11ef1a6f42f681ebb1b6c06d3 *man/abstract-datagroup.Rd
@@ -99,7 +99,7 @@ af398358d6af74003cc7030b747c882b *man/geojob-methods.Rd
 d7239346614a88f17a2e33f2bee37d1e *man/geoknife-methods.Rd
 71b8668906ce922b00ab95b07739ef6b *man/geom.Rd
 521e051f87d059a5f5facb9d5b132428 *man/getJobState.Rd
-12e692795d8dede4e052172435a9c232 *man/inputs-webprocess.Rd
+25f9ba89565ede8abcae1b412628cc76 *man/inputs-webprocess.Rd
 a10f80489b184b780d11889a79326301 *man/parseCategorical.Rd
 74f005492c672ba9bf1086cf3b74ae9e *man/parseTimeseries.Rd
 8010260e240d1ea9c0f901d0c4f478a1 *man/query.Rd
@@ -176,6 +176,6 @@ b195e1b865dd0e4672577a6d64c76675 *tests/testthat/test-waitUntilFinished.R
 5d8e30a0e2f4373b7c14bbb0ca6d1cbc *tests/testthat/test-webprocess_input.R
 8eac932033ae9cfe3302f15b68f9ee7c *tests/testthat/test-webprocess_object.R
 c43619df7c2973b020ed34a16b77e10b *tests/testthat/test-whisker_templating.R
-30a53384de98ee071e03238249c2ec37 *vignettes/custom_data_sources.Rmd
+56b9a0f88a0af5591c6a54cc5bf309ed *vignettes/custom_data_sources.Rmd
 4828206ed2c4e4e1be395f80913e3691 *vignettes/geoknife.Rmd
 632a07daf857f5c38ca662063c38291e *vignettes/plot_geotiff.Rmd
