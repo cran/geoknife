@@ -1,7 +1,7 @@
 Package: geoknife
 Type: Package
 Title: Web-Processing of Large Gridded Datasets
-Version: 1.6.9
+Version: 1.6.10
 Authors@R: c( person("Jordan", "Read", role = c("aut"),
     email = "jread@usgs.gov"),
     person("Jordan", "Walker", role = c("aut"),
@@ -24,8 +24,8 @@ Description: Processes gridded datasets found on the U.S. Geological Survey
     hosted on the Internet. The package provides access to several data subset and
     summarization algorithms that are available on remote web processing servers (Read et al. (2015) <doi:10.1111/ecog.01880>).
 License: CC0
-URL: https://github.com/USGS-R/geoknife
-BugReports: https://github.com/USGS-R/geoknife/issues
+URL: https://github.com/DOI-USGS/geoknife
+BugReports: https://github.com/DOI-USGS/geoknife/issues
 Copyright: This software is in the public domain because it contains
         materials that originally came from the United States
         Geological Survey, an agency of the United States Department of
@@ -34,12 +34,12 @@ Depends: R (>= 3.5)
 Imports: whisker, xml2, methods, httr (>= 1.0.0), curl, utils, progress
         (>= 1.1.2), sf
 Suggests: testthat, xtable, knitr, rmarkdown, ggmap, dplyr, rasterVis,
-        ggplot2, rgdal, sp, raster
+        ggplot2, sp, raster
 VignetteBuilder: knitr
 Encoding: UTF-8
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.2
 NeedsCompilation: no
-Packaged: 2022-11-08 18:31:44 UTC; dblodgett
+Packaged: 2022-12-15 05:09:19 UTC; dblodgett
 Author: Jordan Read [aut],
   Jordan Walker [aut],
   Alison Appling [aut],
@@ -50,4 +50,4 @@ Author: Jordan Read [aut],
   David Watkins [aut]
 Maintainer: David Blodgett <dblodgett@usgs.gov>
 Repository: CRAN
-Date/Publication: 2022-11-08 22:40:05 UTC
+Date/Publication: 2022-12-15 08:40:02 UTC

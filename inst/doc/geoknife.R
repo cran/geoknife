@@ -16,7 +16,7 @@ id <- geoknife::id
 
 ## ---- eval=FALSE------------------------------------------
 #  install.packages("devtools")
-#  devtools::install_github('USGS-R/geoknife')
+#  devtools::install_github('DOI-USGS/geoknife')
 
 ## ---------------------------------------------------------
 library(geoknife)
