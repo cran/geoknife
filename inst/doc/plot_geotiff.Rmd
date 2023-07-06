@@ -20,9 +20,10 @@ options(continue=" ")
 options(width=60)
 library(knitr)
 library(geoknife)
-knitr::opts_chunk$set(eval=nzchar(Sys.getenv("geoknife_vignette_eval")))
+knitr::opts_chunk$set(eval=FALSE)
 ```
 
+*Service is no longer working. This vignette will not be built.*
 
 `geoknife` has a number of output formats, but a new one that was added in version 1.1.0 of the package (after the initial release to CRAN) is the ability to output results as a zip file that contains a series of geotiffs for each timestep requested. This vignette is a brief introduction on how to do this using a few additional packages that are in the `Suggests` field in the description. 
 

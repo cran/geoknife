@@ -34,8 +34,7 @@
 #'
 #'Making concurrent requests to the Geo Data Portal will NOT result in faster overall execution times. 
 #'The data backing the system is on high performance storage, but that storage is not meant to support 
-#'parallelized random access and can be significantly slower under these conditions. Read more: 
-#'https://my.usgs.gov/confluence/display/GeoDataPortal/Geo+Data+Portal+Scalability+Guidelines
+#'parallelized random access and can be significantly slower under these conditions.
 #'@docType methods
 #'@aliases
 #'geoknife

@@ -30,12 +30,13 @@ wd <- webdata('prism')
 wg <- webgeom('state::New Hampshire')
 wp <- webprocess()
 
+\dontrun{
 if(!any(is.null(wp), is.null(wg), is.null(wd))) {
  gj <- geojob()
  xml(gj) <- XML(wg, wd, wp)
  url(gj) <- url(wp)
 }
-\dontrun{
+
 gj <- start(gj)
 gj <- cancel(gj)
 }

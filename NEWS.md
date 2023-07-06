@@ -1,3 +1,7 @@
+geoknife 1.6.11
+==========
+* avoi flagging example
+
 geoknife 1.6.10
 ==========
 * updates urls to reflect new repository

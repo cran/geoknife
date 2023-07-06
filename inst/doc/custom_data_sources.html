@@ -12,7 +12,7 @@
 
 <meta name="author" content="David Blodgett" />
 
-<meta name="date" content="2022-12-14" />
+<meta name="date" content="2023-07-03" />
 
 <title>Using geoknife with a custom webgeom and/or webdata</title>
 
@@ -341,7 +341,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h1 class="title toc-ignore">Using <code>geoknife</code> with a custom
 webgeom and/or webdata</h1>
 <h4 class="author">David Blodgett</h4>
-<h4 class="date">2022-12-14</h4>
+<h4 class="date">2023-07-03</h4>
 
 
 
@@ -365,55 +365,43 @@ service request being made when you execute this vignette.</p>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>stencil_geoms <span class="ot">&lt;-</span> <span class="fu">query</span>(stencil, <span class="st">&#39;geoms&#39;</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(stencil_geoms)</span></code></pre></div>
-<pre><code>## [1] &quot;sb:footprint&quot;                &quot;sb:Yahara_River_HRUs_alb_eq&quot;</code></pre>
 <p>Now we can select a WFS geometry layer (<code>geom</code>) and query
 for its attributes.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">geom</span>(stencil) <span class="ot">&lt;-</span> stencil_geoms[<span class="dv">2</span>]</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>stencil_attributes <span class="ot">&lt;-</span> <span class="fu">query</span>(stencil, <span class="st">&#39;attributes&#39;</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(stencil_attributes)</span></code></pre></div>
-<pre><code>## [1] &quot;ID&quot;       &quot;GRIDCODE&quot; &quot;X_COORD&quot;  &quot;Y_COORD&quot;</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">geom</span>(stencil) <span class="ot">&lt;-</span> stencil_geoms[<span class="dv">2</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>stencil_attributes <span class="ot">&lt;-</span> <span class="fu">query</span>(stencil, <span class="st">&#39;attributes&#39;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(stencil_attributes)</span></code></pre></div>
 <p>Now we can select an attribute and query for the values of that
 attribute. For this demo, we won’t set the values, but rather just move
 forward using all polygons in this geom</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attribute</span>(stencil) <span class="ot">&lt;-</span> stencil_attributes[<span class="dv">2</span>]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">query</span>(stencil, <span class="st">&#39;values&#39;</span>))</span></code></pre></div>
-<pre><code>##  [1] &quot;55&quot; &quot;53&quot; &quot;54&quot; &quot;51&quot; &quot;50&quot; &quot;48&quot; &quot;52&quot; &quot;45&quot; &quot;46&quot; &quot;47&quot; &quot;42&quot; &quot;49&quot; &quot;43&quot; &quot;41&quot; &quot;40&quot;
-## [16] &quot;44&quot; &quot;39&quot; &quot;38&quot; &quot;36&quot; &quot;37&quot; &quot;34&quot; &quot;35&quot; &quot;31&quot; &quot;33&quot; &quot;27&quot; &quot;25&quot; &quot;32&quot; &quot;30&quot; &quot;26&quot; &quot;28&quot;
-## [31] &quot;29&quot; &quot;21&quot; &quot;22&quot; &quot;24&quot; &quot;23&quot; &quot;20&quot; &quot;19&quot; &quot;17&quot; &quot;18&quot; &quot;16&quot; &quot;15&quot; &quot;14&quot; &quot;13&quot; &quot;9&quot;  &quot;8&quot; 
-## [46] &quot;11&quot; &quot;12&quot; &quot;10&quot; &quot;7&quot;  &quot;6&quot;  &quot;5&quot;  &quot;4&quot;  &quot;2&quot;  &quot;3&quot;  &quot;1&quot;</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attribute</span>(stencil) <span class="ot">&lt;-</span> stencil_attributes[<span class="dv">2</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">query</span>(stencil, <span class="st">&#39;values&#39;</span>))</span></code></pre></div>
 <p>Now we’ll set up our webdata with an OPeNDAP service as its url. Note
 that this can be any OPeNDAP service compatible with
 <code>geoknife</code> and the Geo Data Portal. What datasets are
-compatible is beyond the scope of this vignette, but is documented <a href="https://my.usgs.gov/confluence/display/GeoDataPortal/Custom+Dataset+Use+Guidlines">here</a>.
-The OPeNDAP dataset used here is from the <a href="https://cida.usgs.gov/thredds/">main USGS THREDDS archive</a> and
-is one included in <code>geoknife</code> but many other OPeNDAP datasets
-could be used by entering their OPeNDAP service base URL in the same
-way.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fabric <span class="ot">&lt;-</span> <span class="fu">webdata</span>(<span class="at">url =</span> <span class="st">&#39;https://cida.usgs.gov/thredds/dodsC/prism_v2&#39;</span>, </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">variables =</span> <span class="fu">c</span>(<span class="st">&#39;tmx&#39;</span>, <span class="st">&#39;tmn&#39;</span>, <span class="st">&#39;ppt&#39;</span>),</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">times =</span> <span class="fu">as.POSIXct</span>(<span class="fu">c</span>(<span class="st">&#39;2000-01-01&#39;</span>, <span class="st">&#39;2010-01-01&#39;</span>)))</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fabric)</span></code></pre></div>
-<pre><code>## An object of class &quot;webdata&quot;:
-## times: 2000-01-01T00:00:00Z, 2010-01-01T00:00:00Z
-## url: https://cida.usgs.gov/thredds/dodsC/prism_v2 
-## variables: tmx, tmn, ppt</code></pre>
+compatible is beyond the scope of this vignette. The OPeNDAP dataset
+used here is from the <a href="https://cida.usgs.gov/thredds/">main USGS
+THREDDS archive</a> and is one included in <code>geoknife</code> but
+many other OPeNDAP datasets could be used by entering their OPeNDAP
+service base URL in the same way.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fabric <span class="ot">&lt;-</span> <span class="fu">webdata</span>(<span class="at">url =</span> <span class="st">&#39;https://cida.usgs.gov/thredds/dodsC/prism_v2&#39;</span>, </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">variables =</span> <span class="fu">c</span>(<span class="st">&#39;tmx&#39;</span>, <span class="st">&#39;tmn&#39;</span>, <span class="st">&#39;ppt&#39;</span>),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">times =</span> <span class="fu">as.POSIXct</span>(<span class="fu">c</span>(<span class="st">&#39;2000-01-01&#39;</span>, <span class="st">&#39;2010-01-01&#39;</span>)))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fabric)</span></code></pre></div>
 <p>Note that if you don’t know the valid variables and times for an
 OPeNDAP URL, you can use <code>query</code> to find them like this.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fabric_variables <span class="ot">&lt;-</span> <span class="fu">query</span>(fabric, <span class="st">&quot;variables&quot;</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fabric_times <span class="ot">&lt;-</span> <span class="fu">query</span>(fabric, <span class="st">&quot;times&quot;</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(fabric<span class="sc">@</span>url, <span class="st">&quot;has&quot;</span>, </span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">paste</span>(fabric_variables, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), </span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;variables for the time range&quot;</span>, fabric_times[<span class="dv">1</span>], </span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;to&quot;</span>, fabric_times[<span class="dv">2</span>]))</span></code></pre></div>
-<pre><code>## [1] &quot;https://cida.usgs.gov/thredds/dodsC/prism_v2 has tmx, ppt, tmn variables for the time range 1895-01-01 to 2020-12-01&quot;</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fabric_variables <span class="ot">&lt;-</span> <span class="fu">query</span>(fabric, <span class="st">&quot;variables&quot;</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fabric_times <span class="ot">&lt;-</span> <span class="fu">query</span>(fabric, <span class="st">&quot;times&quot;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(fabric<span class="sc">@</span>url, <span class="st">&quot;has&quot;</span>, </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">paste</span>(fabric_variables, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>), </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;variables for the time range&quot;</span>, fabric_times[<span class="dv">1</span>], </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;to&quot;</span>, fabric_times[<span class="dv">2</span>]))</span></code></pre></div>
 <p>Now we can execute the <code>geoknife</code> job for the specified
 fabric and stencil. Note that we set <code>wait = TRUE</code> here so we
 can just wait for the result of the process.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>prism_yahara_result <span class="ot">&lt;-</span> <span class="fu">result</span>(<span class="fu">geoknife</span>(stencil, fabric, <span class="at">wait =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
-<pre><code>## [1] &quot;The returned dataframe has 58 columns with names &#39;DateTime&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;10&#39;, &#39;11&#39;, &#39;12&#39;, &#39;13&#39;, &#39;14&#39;, &#39;15&#39;, &#39;16&#39;, &#39;17&#39;, &#39;18&#39;, &#39;19&#39;, &#39;20&#39;, &#39;21&#39;, &#39;22&#39;, &#39;23&#39;, &#39;24&#39;, &#39;25&#39;, &#39;26&#39;, &#39;27&#39;, &#39;28&#39;, &#39;29&#39;, &#39;30&#39;, &#39;31&#39;, &#39;32&#39;, &#39;33&#39;, &#39;34&#39;, &#39;35&#39;, &#39;36&#39;, &#39;37&#39;, &#39;38&#39;, &#39;39&#39;, &#39;40&#39;, &#39;41&#39;, &#39;42&#39;, &#39;43&#39;, &#39;44&#39;, &#39;45&#39;, &#39;46&#39;, &#39;47&#39;, &#39;48&#39;, &#39;49&#39;, &#39;50&#39;, &#39;51&#39;, &#39;52&#39;, &#39;53&#39;, &#39;54&#39;, &#39;55&#39;, &#39;variable&#39;, &#39;statistic&#39; and 363 rows from 2000-01-01 to 2010-01-01&quot;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>prism_yahara_result <span class="ot">&lt;-</span> <span class="fu">result</span>(<span class="fu">geoknife</span>(stencil, fabric, <span class="at">wait =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 
 
 

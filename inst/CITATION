@@ -1,6 +1,7 @@
 citHeader("To cite the geoknife package in publications use:")
-citEntry(entry = "Article", 
-    author = personList(
+
+bibentry(bibtype = "Article", 
+    author = c(
         as.person("Jordan S. Read"), 
         as.person("Jordan I. Walker"), 
         as.person("Alison Appling"), 
@@ -12,4 +13,5 @@ citEntry(entry = "Article",
     year = "2015", 
     doi = "10.1111/ecog.01880", 
     url = "https://doi.org/10.1111/ecog.01880", 
-    textVersion = paste("Read JS, JI Walker, A Appling, DL Blodgett, EK Read, LA Winslow. 2015. geoknife: Reproducible web-processing of large gridded datasets. Ecography. doi:10.1111/ecog.01880"))
+    textVersion = paste("Read JS, JI Walker, A Appling, DL Blodgett, EK Read, LA Winslow. 2015. geoknife: Reproducible web-processing of large gridded datasets. Ecography. doi:10.1111/ecog.01880")
+    )
